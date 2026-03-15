@@ -4288,7 +4288,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "8Mhz"
+		(property "Value" "16Mhz"
 			(at 27.94 71.1199 90)
 			(effects
 				(font

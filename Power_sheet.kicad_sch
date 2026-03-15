@@ -3470,7 +3470,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 67.6148 116.84 0)
 			(effects
 				(font
@@ -3678,7 +3678,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 52.832 52.07 90)
 			(effects
 				(font
@@ -3745,7 +3745,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 123.19 153.9748 0)
 			(effects
 				(font
@@ -3878,7 +3878,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 44.7548 156.21 0)
 			(effects
 				(font
@@ -3945,7 +3945,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 56.1848 156.21 0)
 			(effects
 				(font
@@ -4165,7 +4165,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 105.7148 74.93 0)
 			(effects
 				(font
@@ -4369,7 +4369,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 94.2848 74.93 0)
 			(effects
 				(font
@@ -4506,7 +4506,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 78.74 44.958 90)
 			(effects
 				(font
@@ -4715,7 +4715,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 65.532 167.64 90)
 			(effects
 				(font
@@ -5062,7 +5062,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 65.532 152.4 90)
 			(effects
 				(font
@@ -5283,7 +5283,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 119.38 111.252 90)
 			(effects
 				(font
@@ -5582,7 +5582,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 32.7152 163.83 0)
 			(effects
 				(font
@@ -5652,7 +5652,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 18.542 38.1 90)
 			(effects
 				(font
@@ -5719,7 +5719,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 79.0448 116.84 0)
 			(effects
 				(font
