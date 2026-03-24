@@ -424,7 +424,7 @@
                 "__ATOMIC_ACQ_REL=4",
                 "__ATOMIC_RELEASE=3"
             ],
-            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+            // "compilerPath": "/usr/bin/arm-none-eabi-gcc",
             "cStandard": "c99",
             "cppStandard": "c++11",
             "intelliSenseMode": "${default}"
