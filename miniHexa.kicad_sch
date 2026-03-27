@@ -6494,7 +6494,7 @@
 		)
 	)
 	(sheet
-		(at 219.075 59.69)
+		(at 179.07 77.47)
 		(size 26.035 13.97)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6510,7 +6510,7 @@
 		)
 		(uuid "33698118-31e2-44d0-a5be-b46ca646d44a")
 		(property "Sheetname" "Power_handler"
-			(at 219.075 58.9784 0)
+			(at 179.07 76.7584 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6519,7 +6519,7 @@
 			)
 		)
 		(property "Sheetfile" "Power_sheet.kicad_sch"
-			(at 219.075 74.2446 0)
+			(at 179.07 92.0246 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6536,7 +6536,7 @@
 		)
 	)
 	(sheet
-		(at 219.71 24.765)
+		(at 179.705 42.545)
 		(size 24.765 12.7)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6552,7 +6552,7 @@
 		)
 		(uuid "ab6fc79c-7afe-4f15-867d-9973f20f9319")
 		(property "Sheetname" "18 PWM INTERFACE"
-			(at 219.71 24.0534 0)
+			(at 179.705 41.8334 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6561,7 +6561,7 @@
 			)
 		)
 		(property "Sheetfile" "18_pwm_interface.kicad_sch"
-			(at 219.71 38.0496 0)
+			(at 179.705 55.8296 0)
 			(effects
 				(font
 					(size 1.27 1.27)
