@@ -3965,7 +3965,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Microphone:MIC_INMP441ACEZ-R7"
+		(property "Footprint" "Audio_Module:MIC_INMP441ACEZ-R7"
 			(at 48.26 172.72 0)
 			(effects
 				(font
@@ -4780,7 +4780,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 93.472 179.07 90)
 			(effects
 				(font
@@ -5467,7 +5467,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Microphone:MIC_INMP441ACEZ-R7"
+		(property "Footprint" "Audio_Module:MIC_INMP441ACEZ-R7"
 			(at 118.11 172.72 0)
 			(effects
 				(font
