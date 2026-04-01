@@ -735,8 +735,8 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "BT"
-				(at 2.54 2.54 0)
+			(property "Reference" "BT1"
+				(at 3.81 1.8416 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -745,7 +745,7 @@
 				)
 			)
 			(property "Value" "Battery"
-				(at 2.54 0 0)
+				(at 3.81 -0.6984 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -753,7 +753,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Battery:BatteryHolder_Keystone_2468_2xAAA"
 				(at 0 1.524 90)
 				(effects
 					(font
@@ -933,6 +933,18 @@
 						(type none)
 					)
 				)
+				(polyline
+					(pts
+						(xy 1.27 -3.81) (xy 1.27 -4.826)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 			)
 			(symbol "Battery_1_1"
 				(pin passive line
@@ -956,7 +968,7 @@
 				(pin passive line
 					(at 0 -5.08 90)
 					(length 2.54)
-					(name "-"
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6661,7 +6673,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Battery:BatteryHolder_Keystone_2468_2xAAA"
 			(at 248.92 67.056 90)
 			(effects
 				(font
