@@ -5,7 +5,7 @@ PreviewDir="Preview"
 exportSchema()
 {
     kicad-cli sch export pdf -b --output $PreviewDir/temp.pdf $1
-    pdftoppm -png -singlefile -r 300 $PreviewDir/temp.pdf $PreviewDir/$1.png 
+    pdftoppm -png -singlefile -r 300 $PreviewDir/temp.pdf ./$PreviewDir/$1.png 
 }
 
 updateReadme()
@@ -21,7 +21,7 @@ updateReadme()
     # Append if it doesn't exit
 
     # Update if it does
-
+    echo "temp"
 }
 
 mkdir -p $PreviewDir # create preview directory if it doesn't exits

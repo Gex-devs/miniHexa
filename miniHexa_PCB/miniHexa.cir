@@ -1,0 +1,91 @@
+.title KiCad schematic
+.model __D1 D
+.model __D3 D
+C7 +3.3V GND 10u
+C3 +3.3V GND 100n
+C5 +3.3V GND 100n
+C4 +3.3V GND 100n
+MK2 __MK2
+R29 MIC_WS GND 100k
+MK1 __MK1
+U1 __U1
+C6 +3.3V GND 100n
+C8 +3.3V GND 10n
+C9 +3.3V GND 1u
+C10 +3.3V GND 1u
+C1 GND Net-_U1-PH0_ 20p
+Y1 __Y1
+C13 Net-_U1-NRST_ GND 100n
+C2 Net-_U1-PH1_ GND 20p
+R10 SERVO10 Net-_Servo10-Pin_3_ 1k
+Servo7 __Servo7
+F3 __F3
+R8 SERVO8 Net-_Servo8-Pin_3_ 1k
+R7 SERVO7 Net-_Servo7-Pin_3_ 1k
+R12 SERVO12 Net-_Servo12-Pin_3_ 1k
+R11 SERVO11 Net-_Servo11-Pin_3_ 1k
+Servo8 __Servo8
+R9 SERVO9 Net-_Servo9-Pin_3_ 1k
+Servo5 __Servo5
+R16 SERVO16 Net-_Servo16-Pin_3_ 1k
+Servo15 __Servo15
+R4 SERVO4 Net-_Servo4-Pin_3_ 1k
+R5 SERVO5 Net-_Servo5-Pin_3_ 1k
+R6 SERVO6 Net-_Servo6-Pin_3_ 1k
+Servo6 __Servo6
+Servo3 __Servo3
+Servo4 __Servo4
+F2 __F2
+F6 __F6
+Servo16 __Servo16
+R17 SERVO17 Net-_Servo17-Pin_3_ 1k
+Servo18 __Servo18
+R18 SERVO18 Net-_Servo18-Pin_3_ 1k
+Servo17 __Servo17
+Servo14 __Servo14
+Servo1 __Servo1
+R13 SERVO13 Net-_Servo13-Pin_3_ 1k
+F1 __F1
+R2 SERVO2 Net-_Servo2-Pin_3_ 1k
+R1 SERVO1 Net-_Servo1-Pin_3_ 1k
+Servo2 __Servo2
+R3 SERVO3 Net-_Servo3-Pin_3_ 1k
+F5 __F5
+Servo13 __Servo13
+R15 SERVO15 Net-_Servo15-Pin_3_ 1k
+R14 SERVO14 Net-_Servo14-Pin_3_ 1k
+R19 PB3 Net-_Servo19-Pin_3_ 1k
+Servo12 __Servo12
+Servo11 __Servo11
+Servo19 __Servo19
+F7 __F7
+Servo10 __Servo10
+Servo9 __Servo9
+F4 __F4
+R21 PB5 Net-_Servo21-Pin_3_ 1k
+Servo21 __Servo21
+Servo20 __Servo20
+R20 PB4 Net-_Servo20-Pin_3_ 1k
+C17 GND +5V 22u
+C18 GND +5V 100u
+D1 Net-_D1-A_ VOUT __D1
+J1 __J1
+C20 GND VIN 22u
+SW1 __SW1
+C21 GND VIN 4.7u
+R25 FB GND 3.16k
+C15 VIN GND 4.7u
+L1 +5V Net-_D3-K_ 15u
+R23 VIN Net-_U3-EN_ 100k
+U3 __U3
+C14 Net-_D3-K_ Net-_U3-BOOT_ 10n
+D3 GND Net-_D3-K_ __D3
+U2 __U2
+C11 +5V GND 10u
+R22 Net-_D2-K_ GND 10
+D2 Net-_D2-K_ +3.3V LED
+C12 +3.3V GND 10u
+C19 +5V GND 100uF/10v
+C16 VIN GND 22u
+R24 +5V FB 10k_0.1%
+.end
