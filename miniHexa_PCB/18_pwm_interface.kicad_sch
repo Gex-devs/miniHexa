@@ -3736,7 +3736,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "10k"
 			(at 193.04 97.7899 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4411,7 +4411,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 176.022 90.17 90)
 			(hide yes)
 			(show_name no)

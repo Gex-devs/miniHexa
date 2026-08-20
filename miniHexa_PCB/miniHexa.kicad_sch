@@ -2700,6 +2700,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "R for jumping a trace"
+		(exclude_from_sim no)
+		(at 141.732 94.234 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f82f4a4d-2d95-44ab-9f19-43dcc300fa4a")
+	)
 	(text_box "Stereo Mic\n"
 		(exclude_from_sim no)
 		(at 30.48 140.97 0)
@@ -3005,6 +3015,16 @@
 			(type default)
 		)
 		(uuid "473c37bf-d117-4956-a58f-701a3f06b03e")
+	)
+	(wire
+		(pts
+			(xy 135.89 97.79) (xy 132.08 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49aafbd3-d83d-45f7-8216-a92fb0a9b6af")
 	)
 	(wire
 		(pts
@@ -3318,6 +3338,16 @@
 	)
 	(wire
 		(pts
+			(xy 124.46 97.79) (xy 120.65 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea75190d-2a28-4893-9dc6-ad5ca5a2b402")
+	)
+	(wire
+		(pts
 			(xy 102.87 31.75) (xy 105.41 31.75)
 		)
 		(stroke
@@ -3336,9 +3366,19 @@
 		)
 		(uuid "fcd2092f-341c-4ee6-813c-b1df2bc5c1c2")
 	)
+	(label "I2C_SCK"
+		(at 121.92 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8db9caf9-5efe-4f25-9af5-23b3840f635f")
+	)
 	(global_label "I2C_SCK"
 		(shape input)
-		(at 120.65 97.79 0)
+		(at 135.89 97.79 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3348,7 +3388,7 @@
 		)
 		(uuid "15876e8c-dceb-4a34-8074-f7749983528a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 131.4366 97.79 0)
+			(at 146.6766 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5589,6 +5629,86 @@
 			(project "miniHexa"
 				(path "/3449ee66-2977-4802-a474-0821cdf4e79b"
 					(reference "C7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 128.27 97.79 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7d916a3f-9301-4356-83f2-57235ad4968e")
+		(property "Reference" "R2"
+			(at 128.27 91.44 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 128.27 93.98 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 128.27 99.568 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 128.27 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 128.27 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "d3b13a5d-01cd-4b73-8dff-969bc37a391c")
+		)
+		(pin "1"
+			(uuid "55a87215-f74d-4b8a-962c-0c0fb6bbcba6")
+		)
+		(instances
+			(project "miniHexa"
+				(path "/3449ee66-2977-4802-a474-0821cdf4e79b"
+					(reference "R2")
 					(unit 1)
 				)
 			)
