@@ -76,7 +76,20 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "invalid_outline|116750000|75787456|16d16864-efe3-48a2-937d-0234b66f96b9|ad9fb64b-8993-417c-b854-4260380756a9",
+          ""
+        ],
+        [
+          "unconnected_items|157950000|81900000|F.Cu|4|2a7c2f43-36a1-4427-81d3-ffdf32b2664c|91f0c36a-59eb-490d-b73c-cab952050949",
+          "Connected with 0 ohm R"
+        ],
+        [
+          "unconnected_items|159500000|86225000|F.Cu|4|5edc9bea-23b7-40bf-ac2b-235c72675f8b|78f0fdb3-3185-4e9e-b2c7-35981dd383e5",
+          "Connected with 0 ohm R"
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -211,6 +224,7 @@
       ],
       "track_widths": [
         0.0,
+        0.13,
         0.2,
         0.3,
         0.5
@@ -685,7 +699,7 @@
         "uuid": "3449ee66-2977-4802-a474-0821cdf4e79b"
       }
     ],
-    "used_designators": "SW1,#PWR12,#PWR14,#PWR29-30,#PWR32,#PWR35,#PWR42-46,#PWR51-54,R1-3,R32,C2,C27,C30-32,MK1-2",
+    "used_designators": "SW1,#PWR12,#PWR14,#PWR29-30,#PWR32-33,#PWR35,#PWR42-46,#PWR51-54,R1-3,R32,C2,C27,C30-32,MK1-2",
     "variants": []
   },
   "sheets": [

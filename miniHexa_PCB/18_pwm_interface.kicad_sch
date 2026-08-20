@@ -2747,7 +2747,7 @@
 	)
 	(global_label "SERVO11"
 		(shape input)
-		(at 232.41 119.38 0)
+		(at 232.41 121.92 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2757,7 +2757,7 @@
 		)
 		(uuid "36d7f467-9d56-4f12-af20-5ac91a50e919")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 243.8618 119.38 0)
+			(at 243.8618 121.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2795,7 +2795,7 @@
 	)
 	(global_label "SERVO4"
 		(shape input)
-		(at 232.41 101.6 0)
+		(at 232.41 109.22 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2805,7 +2805,7 @@
 		)
 		(uuid "52eec71f-36e3-43d9-a61d-c71e82c851c9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.6523 101.6 0)
+			(at 242.6523 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2843,7 +2843,7 @@
 	)
 	(global_label "SERVO3"
 		(shape input)
-		(at 232.41 99.06 0)
+		(at 232.41 106.68 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2853,7 +2853,7 @@
 		)
 		(uuid "69458950-b9cc-49cf-ad62-57ce99babe22")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.6523 99.06 0)
+			(at 242.6523 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2891,7 +2891,7 @@
 	)
 	(global_label "SERVO15"
 		(shape input)
-		(at 232.41 129.54 0)
+		(at 232.41 93.98 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2901,7 +2901,7 @@
 		)
 		(uuid "7c7b6195-5bf0-413d-a85a-799b51ecebe0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 243.8618 129.54 0)
+			(at 242.6523 93.98 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2915,7 +2915,7 @@
 	)
 	(global_label "SERVO14"
 		(shape input)
-		(at 232.41 127 0)
+		(at 232.41 96.52 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2925,7 +2925,7 @@
 		)
 		(uuid "876e8a82-1b38-4cfb-a0fc-3fb0647b855b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 243.8618 127 0)
+			(at 242.6523 96.52 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2963,7 +2963,7 @@
 	)
 	(global_label "SERVO2"
 		(shape input)
-		(at 232.41 96.52 0)
+		(at 232.41 104.14 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2973,7 +2973,7 @@
 		)
 		(uuid "891c409d-11c3-4b25-ae9a-01eccd45041f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.6523 96.52 0)
+			(at 242.6523 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3059,7 +3059,7 @@
 	)
 	(global_label "SERVO7"
 		(shape input)
-		(at 232.41 109.22 0)
+		(at 232.41 129.54 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3069,7 +3069,7 @@
 		)
 		(uuid "966acdbb-d72c-4eb9-9804-36541133747c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.6523 109.22 0)
+			(at 243.8618 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3131,7 +3131,7 @@
 	)
 	(global_label "SERVO12"
 		(shape input)
-		(at 232.41 121.92 0)
+		(at 232.41 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3141,7 +3141,7 @@
 		)
 		(uuid "a25e083e-0f6d-4467-a377-93e49f9762f5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 243.8618 121.92 0)
+			(at 243.8618 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3155,7 +3155,7 @@
 	)
 	(global_label "SERVO1"
 		(shape input)
-		(at 232.41 93.98 0)
+		(at 232.41 101.6 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3165,7 +3165,7 @@
 		)
 		(uuid "a4128c23-859d-4431-8e3e-7256e92af9d7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.6523 93.98 0)
+			(at 242.6523 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3203,7 +3203,7 @@
 	)
 	(global_label "SERVO6"
 		(shape input)
-		(at 232.41 106.68 0)
+		(at 232.41 114.3 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3213,7 +3213,7 @@
 		)
 		(uuid "af71f3a6-ec7e-4794-a231-16598b602ec0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.6523 106.68 0)
+			(at 242.6523 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3227,7 +3227,7 @@
 	)
 	(global_label "SERVO13"
 		(shape input)
-		(at 232.41 124.46 0)
+		(at 232.41 99.06 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3237,7 +3237,7 @@
 		)
 		(uuid "b17b94d7-e66e-488c-83cf-402d06395694")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 243.8618 124.46 0)
+			(at 242.6523 99.06 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3251,7 +3251,7 @@
 	)
 	(global_label "SERVO9"
 		(shape input)
-		(at 232.41 114.3 0)
+		(at 232.41 124.46 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3261,7 +3261,7 @@
 		)
 		(uuid "b388bd2a-e7c6-45a0-a251-62efe0017f8e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.6523 114.3 0)
+			(at 243.8618 124.46 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3371,7 +3371,7 @@
 	)
 	(global_label "SERVO5"
 		(shape input)
-		(at 232.41 104.14 0)
+		(at 232.41 111.76 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3381,7 +3381,7 @@
 		)
 		(uuid "ec07fc40-8d75-43a8-a846-afc08dadd1d6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.6523 104.14 0)
+			(at 242.6523 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3443,7 +3443,7 @@
 	)
 	(global_label "SERVO8"
 		(shape input)
-		(at 232.41 111.76 0)
+		(at 232.41 127 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3453,7 +3453,7 @@
 		)
 		(uuid "ffd242f1-99b1-4d4d-8fcc-906dd719fc89")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.6523 111.76 0)
+			(at 243.8618 127 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4411,7 +4411,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 176.022 90.17 90)
 			(hide yes)
 			(show_name no)

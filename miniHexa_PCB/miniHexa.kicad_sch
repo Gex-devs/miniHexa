@@ -2849,6 +2849,12 @@
 		(uuid "bf8cf155-8ee4-419c-b87e-cccd4ca0907e")
 	)
 	(junction
+		(at 104.14 125.73)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d018e1d0-e41b-40a3-b457-c5ec99fe1fc4")
+	)
+	(junction
 		(at 43.18 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3244,6 +3250,16 @@
 	)
 	(wire
 		(pts
+			(xy 104.14 125.73) (xy 105.41 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd2bf34c-f4b3-4177-8cac-fec432d09080")
+	)
+	(wire
+		(pts
 			(xy 58.42 177.8) (xy 74.93 177.8)
 		)
 		(stroke
@@ -3251,6 +3267,16 @@
 			(type default)
 		)
 		(uuid "c40d7887-2c82-4413-acd0-6dedb9263cdd")
+	)
+	(wire
+		(pts
+			(xy 102.87 125.73) (xy 104.14 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca25231d-029f-4be0-a7a1-60e7bd4b3b37")
 	)
 	(wire
 		(pts
@@ -4187,6 +4213,84 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 104.14 125.73 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1dc0c26c-0a4a-40a5-bf33-d32fae4633c1")
+		(property "Reference" "#PWR033"
+			(at 104.14 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 104.1399 129.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 104.14 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 104.14 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 104.14 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "03b283d5-beb3-4a7b-afe0-229f9c957532")
+		)
+		(instances
+			(project "miniHexa"
+				(path "/3449ee66-2977-4802-a474-0821cdf4e79b"
+					(reference "#PWR033")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 128.27 27.94 0)
 		(unit 1)
 		(body_style 1)
@@ -4591,7 +4695,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 74.93 110.49 270)
+		(at 74.93 110.49 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4599,10 +4703,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "4b30f090-49a4-4e10-a25e-33b1de9c7175")
 		(property "Reference" "#PWR011"
-			(at 68.58 110.49 0)
+			(at 74.93 116.84 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4613,7 +4716,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 71.12 110.4899 90)
+			(at 74.9299 114.3 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4860,7 +4963,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 71.12 90.932 90)
 			(hide yes)
 			(show_name no)
@@ -5619,7 +5722,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 139.7 99.568 90)
 			(hide yes)
 			(show_name no)
