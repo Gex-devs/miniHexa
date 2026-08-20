@@ -2627,7 +2627,7 @@
 	)
 	(global_label "SERVO14"
 		(shape input)
-		(at 66.04 93.98 90)
+		(at 66.04 101.6 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2637,7 +2637,7 @@
 		)
 		(uuid "259c85a9-94eb-4ece-b3cd-b5e4dfc9bd05")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 66.04 82.5282 90)
+			(at 66.04 90.1482 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2699,7 +2699,7 @@
 	)
 	(global_label "SERVO13"
 		(shape input)
-		(at 49.53 93.98 90)
+		(at 49.53 101.6 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2709,7 +2709,7 @@
 		)
 		(uuid "3472c6ee-3dc2-45b2-bc8b-0712eb6614fd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 49.53 82.5282 90)
+			(at 49.53 90.1482 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2723,7 +2723,7 @@
 	)
 	(global_label "SERVO15"
 		(shape input)
-		(at 82.55 93.98 90)
+		(at 82.55 101.6 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2733,7 +2733,7 @@
 		)
 		(uuid "3492428a-87e2-4148-a005-d1a858f93c5f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 82.55 82.5282 90)
+			(at 82.55 90.1482 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3035,7 +3035,7 @@
 	)
 	(global_label "SERVO18"
 		(shape input)
-		(at 135.89 93.98 90)
+		(at 135.89 101.6 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3045,7 +3045,7 @@
 		)
 		(uuid "8f6e15a8-5858-48ff-b0e4-e22ca0962ade")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 135.89 82.5282 90)
+			(at 135.89 90.1482 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3299,7 +3299,7 @@
 	)
 	(global_label "SERVO17"
 		(shape input)
-		(at 118.11 93.98 90)
+		(at 118.11 101.6 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3309,7 +3309,7 @@
 		)
 		(uuid "c0a9d8cf-6983-41da-8bb9-eef5e958c264")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 118.11 82.5282 90)
+			(at 118.11 90.1482 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3347,7 +3347,7 @@
 	)
 	(global_label "SERVO16"
 		(shape input)
-		(at 100.33 93.98 90)
+		(at 100.33 101.6 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3357,7 +3357,7 @@
 		)
 		(uuid "dfec0361-1c5a-4d54-b8a6-b6544f85b1f7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 100.33 82.5282 90)
+			(at 100.33 90.1482 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3462,88 +3462,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 82.55 97.79 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0a787ee7-8467-40a8-8984-673d84d71f53")
-		(property "Reference" "R15"
-			(at 85.09 96.5199 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1k"
-			(at 85.09 99.0599 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 80.772 97.79 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 82.55 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 82.55 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "1e0d518d-e06b-4a93-9848-f7983f5b6da3")
-		)
-		(pin "2"
-			(uuid "e670919e-24fc-4dfe-959e-9731b8d8ce9f")
-		)
-		(instances
-			(project "miniHexa"
-				(path "/3449ee66-2977-4802-a474-0821cdf4e79b/ab6fc79c-7afe-4f15-867d-9973f20f9319"
-					(reference "R15")
-					(unit 1)
-				)
 			)
 		)
 	)
@@ -3829,7 +3747,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 188.722 96.52 90)
 			(hide yes)
 			(show_name no)
@@ -4127,170 +4045,6 @@
 			(project "miniHexa"
 				(path "/3449ee66-2977-4802-a474-0821cdf4e79b/ab6fc79c-7afe-4f15-867d-9973f20f9319"
 					(reference "Servo4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 100.33 97.79 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6668dccc-c81b-4fc7-8dd9-a0f1990d658b")
-		(property "Reference" "R16"
-			(at 102.87 96.5199 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1k"
-			(at 102.87 99.0599 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 98.552 97.79 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 100.33 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 100.33 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "be94cfec-03d2-4669-b8ae-c2793b81e00a")
-		)
-		(pin "2"
-			(uuid "9193dfa5-7fae-483b-a77a-1621f280e3c4")
-		)
-		(instances
-			(project "miniHexa"
-				(path "/3449ee66-2977-4802-a474-0821cdf4e79b/ab6fc79c-7afe-4f15-867d-9973f20f9319"
-					(reference "R16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 118.11 97.79 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6a5ee9a1-dfdc-4f10-88ea-5c603f0e1d19")
-		(property "Reference" "R17"
-			(at 120.65 96.5199 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1k"
-			(at 120.65 99.0599 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 116.332 97.79 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 118.11 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 118.11 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "84ede9c2-d8c7-4057-9ffe-5a90c68db109")
-		)
-		(pin "2"
-			(uuid "84e98804-8d64-4c1a-ad43-522cde4df7b1")
-		)
-		(instances
-			(project "miniHexa"
-				(path "/3449ee66-2977-4802-a474-0821cdf4e79b/ab6fc79c-7afe-4f15-867d-9973f20f9319"
-					(reference "R17")
 					(unit 1)
 				)
 			)
@@ -5131,88 +4885,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 135.89 97.79 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b8e3982f-80a1-4189-b266-341350e776f6")
-		(property "Reference" "R18"
-			(at 138.43 96.5199 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1k"
-			(at 138.43 99.0599 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 134.112 97.79 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 135.89 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 135.89 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "3fcea12f-a82e-41bf-80f9-b6818fcad968")
-		)
-		(pin "2"
-			(uuid "62c26958-9cc8-4437-93e1-1c78477cf144")
-		)
-		(instances
-			(project "miniHexa"
-				(path "/3449ee66-2977-4802-a474-0821cdf4e79b/ab6fc79c-7afe-4f15-867d-9973f20f9319"
-					(reference "R18")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector:Conn_01x03_Pin")
 		(at 125.73 60.96 180)
 		(unit 1)
@@ -5540,88 +5212,6 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 66.04 97.79 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "cc1f1ad0-0c04-425a-b17e-b72d7be2e2ce")
-		(property "Reference" "R14"
-			(at 68.58 96.5199 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1k"
-			(at 68.58 99.0599 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 64.262 97.79 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 66.04 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 66.04 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "43b285bb-ee4a-491a-826e-91ff009b37b4")
-		)
-		(pin "2"
-			(uuid "5699f589-15f5-4e8b-b819-23ed585044e8")
-		)
-		(instances
-			(project "miniHexa"
-				(path "/3449ee66-2977-4802-a474-0821cdf4e79b/ab6fc79c-7afe-4f15-867d-9973f20f9319"
-					(reference "R14")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
 		(at 182.88 91.44 0)
 		(unit 1)
 		(body_style 1)
@@ -5654,7 +5244,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 181.102 91.44 90)
 			(hide yes)
 			(show_name no)
@@ -6030,88 +5620,6 @@
 			(project "miniHexa"
 				(path "/3449ee66-2977-4802-a474-0821cdf4e79b/ab6fc79c-7afe-4f15-867d-9973f20f9319"
 					(reference "Servo10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 49.53 97.79 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f2490016-f49e-441e-8822-e59a8e483b11")
-		(property "Reference" "R13"
-			(at 52.07 96.5199 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1k"
-			(at 52.07 99.0599 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 47.752 97.79 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 49.53 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 49.53 97.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "4e4a5137-72cf-4d41-80a8-932b220edefe")
-		)
-		(pin "2"
-			(uuid "12534bc0-002c-4491-a3af-9f21aa4f21de")
-		)
-		(instances
-			(project "miniHexa"
-				(path "/3449ee66-2977-4802-a474-0821cdf4e79b/ab6fc79c-7afe-4f15-867d-9973f20f9319"
-					(reference "R13")
 					(unit 1)
 				)
 			)

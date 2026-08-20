@@ -3255,10 +3255,6 @@
 		(at 203.2 59.69)
 		(uuid "cb59c4cb-4202-4a71-8c02-86c95f337f56")
 	)
-	(no_connect
-		(at 203.2 64.77)
-		(uuid "cc074cc5-00b5-43f8-a76a-34f8284a6e9e")
-	)
 	(wire
 		(pts
 			(xy 248.92 82.55) (xy 248.92 73.66)
@@ -4637,7 +4633,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 65.532 38.1 90)
 			(hide yes)
 			(show_name no)
@@ -4717,7 +4713,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 246.38 38.608 90)
 			(hide yes)
 			(show_name no)
@@ -5039,7 +5035,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 196.85 84.328 90)
 			(hide yes)
 			(show_name no)
@@ -5746,6 +5742,85 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 203.2 64.77 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4ddfdac7-08b7-4a4b-ab70-e2e0981b3c61")
+		(property "Reference" "#PWR032"
+			(at 196.85 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 199.39 64.7699 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 203.2 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0f1d2bdb-5983-4650-9787-000be1adb64d")
+		)
+		(instances
+			(project "miniHexa"
+				(path "/3449ee66-2977-4802-a474-0821cdf4e79b/33698118-31e2-44d0-a5be-b46ca646d44a"
+					(reference "#PWR032")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 238.76 58.42 0)
 		(unit 1)
 		(body_style 1)
@@ -6082,7 +6157,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "10uF"
 			(at 233.426 55.372 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6470,7 +6545,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 195.58 59.69 0)
+		(at 191.77 55.88 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6481,29 +6556,27 @@
 		(fields_autoplaced yes)
 		(uuid "746db420-196c-4a8f-aa4d-b32620b31565")
 		(property "Reference" "C25"
-			(at 199.39 58.4199 0)
+			(at 191.77 48.26 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Value" "4.7uF"
-			(at 199.39 60.9599 0)
+			(at 191.77 50.8 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 196.5452 63.5 0)
+			(at 195.58 54.9148 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6514,7 +6587,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 59.69 0)
+			(at 191.77 55.88 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6525,7 +6598,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 195.58 59.69 0)
+			(at 191.77 55.88 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6661,7 +6734,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 246.38 42.418 90)
 			(hide yes)
 			(show_name no)
@@ -6743,7 +6816,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 71.882 162.56 90)
 			(hide yes)
 			(show_name no)
@@ -7027,7 +7100,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 195.58 63.5 0)
+		(at 187.96 55.88 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7038,7 +7111,7 @@
 		(fields_autoplaced yes)
 		(uuid "a44894e6-a033-406a-bce5-3877539acc64")
 		(property "Reference" "#PWR031"
-			(at 195.58 69.85 0)
+			(at 187.96 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7049,7 +7122,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 195.58 68.58 0)
+			(at 187.96 60.96 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7059,7 +7132,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 195.58 63.5 0)
+			(at 187.96 55.88 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7070,7 +7143,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 63.5 0)
+			(at 187.96 55.88 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7081,7 +7154,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 195.58 63.5 0)
+			(at 187.96 55.88 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7220,7 +7293,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 71.882 147.32 90)
 			(hide yes)
 			(show_name no)
@@ -7494,7 +7567,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 125.73 106.172 90)
 			(hide yes)
 			(show_name no)
@@ -7832,7 +7905,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 196.85 79.248 90)
 			(hide yes)
 			(show_name no)
@@ -7913,7 +7986,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 39.0652 158.75 0)
 			(hide yes)
 			(show_name no)
@@ -8072,7 +8145,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 196.85 74.168 90)
 			(hide yes)
 			(show_name no)
@@ -8388,7 +8461,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "47nF"
 			(at 162.814 55.372 0)
 			(show_name no)
 			(do_not_autoplace no)
