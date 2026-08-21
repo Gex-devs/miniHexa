@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <pca9685.h>
 
 /* USER CODE END Includes */
 
@@ -47,7 +48,7 @@ I2S_HandleTypeDef hi2s3;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
-
+pca9685_handle_t pca9685_handle;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,7 +74,9 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  pca9685_handle.i2c_handle = &hi2c1;
+  pca9685_handle.inverted = false;
+  pca9685_handle.device_address = 0x80;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -98,6 +101,7 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  bool success = pca9685_init(&pca9685_handle);
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -4157,6 +4157,16 @@
 		)
 		(uuid "ff6918a7-0929-4328-92c0-b9fe30c6767f")
 	)
+	(label "12V"
+		(at 149.8505 36.83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e1b80fb8-8996-4cce-bcac-308ff13e38de")
+	)
 	(global_label "VIN"
 		(shape input)
 		(at 62.23 127 180)
