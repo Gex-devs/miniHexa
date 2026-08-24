@@ -1,11 +1,8 @@
 # Mini Hexa
 
-Modified Version of opensource Hiwonder miniHexa 
+Rework of Hiwonders mini hexa 
 
-# Version 1.0 
-* No firmware
-* PWM Motors
-* No wireless connectivity 
+# Version 2.0 
 
 
 
