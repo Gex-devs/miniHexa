@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    bsp_conf.h
+  * @file    utilities_conf.h
   * @author  ST67 Application Team
-  * @brief   This file contains definitions for the BSP interface
+  * @brief   Header for configuration file to utilities
   ******************************************************************************
   * @attention
   *
@@ -19,51 +19,53 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef BSP_CONF_H
-#define BSP_CONF_H
+#ifndef UTILITIES_CONF_H
+#define UTILITIES_CONF_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "cmsis_compiler.h"
 
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
-
-/* USER CODE END ET */
-
 /* Exported constants --------------------------------------------------------*/
-/** Interfaces the UART instance to be used for logging communication */
-#define UART_HANDLE                             huart2
-
-/** Interfaces the SPI instance to be used for NCP communication */
-#define NCP_SPI_HANDLE                          hspi1
-
 /* USER CODE BEGIN EC */
 
 /* USER CODE END EC */
 
-/* Global variables ----------------------------------------------------------*/
-/** SPI handle */
-extern SPI_HandleTypeDef NCP_SPI_HANDLE;
+/* Exported variables --------------------------------------------------------*/
+/* USER CODE BEGIN EV */
 
-/** UART handle */
-#ifdef UART_HANDLE
-extern UART_HandleTypeDef UART_HANDLE;
-#endif /* UART_HANDLE */
+/* USER CODE END EV */
 
-/* USER CODE BEGIN GV */
+/* Exported macros -----------------------------------------------------------*/
+/**
+  * @brief  Macro used to initialize the critical section
+  */
+#define UTILS_INIT_CRITICAL_SECTION()
 
-/* USER CODE END GV */
+/**
+  * @brief  Macro used to enter the critical section
+  */
+#define UTILS_ENTER_CRITICAL_SECTION() uint32_t primask_bit= __get_PRIMASK();\
+  __disable_irq()
+
+/**
+  * @brief  Macro used to exit the critical section
+  */
+#define UTILS_EXIT_CRITICAL_SECTION()  __set_PRIMASK(primask_bit)
+
+/* USER CODE BEGIN EM */
+
+/* USER CODE END EM */
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#endif /* BSP_CONF_H */
+#endif /* UTILITIES_CONF_H */

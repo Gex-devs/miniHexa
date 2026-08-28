@@ -78,16 +78,52 @@
       ],
       "drc_exclusions": [
         [
-          "invalid_outline|116750000|75787456|16d16864-efe3-48a2-937d-0234b66f96b9|ad9fb64b-8993-417c-b854-4260380756a9",
+          "clearance|165775000|83587500|75b80428-b46e-497e-9a28-ce9f600a9fae|cba4627c-804f-4a97-ba97-d874c75a65d5",
           ""
         ],
         [
-          "unconnected_items|157950000|81900000|F.Cu|4|2a7c2f43-36a1-4427-81d3-ffdf32b2664c|91f0c36a-59eb-490d-b73c-cab952050949",
-          "Connected with 0 ohm R"
+          "clearance|165775000|84087500|cba4627c-804f-4a97-ba97-d874c75a65d5|ee10143a-96ba-439e-aec2-893df3b372f1",
+          ""
         ],
         [
-          "unconnected_items|159500000|86225000|F.Cu|4|00e51378-bdbc-452e-88d9-5dc3e0ce03bc|3901ff2a-159d-4b71-8237-0e277621f245",
-          "Connected with 0 ohm R"
+          "clearance|166075000|84937500|7e925638-3656-47ed-8b6d-849784f24c44|ee10143a-96ba-439e-aec2-893df3b372f1",
+          ""
+        ],
+        [
+          "clearance|166225000|83412500|75b80428-b46e-497e-9a28-ce9f600a9fae|8f421186-203e-49ec-9a62-66ba1a2cb9aa",
+          ""
+        ],
+        [
+          "clearance|166575000|85387500|f691934b-e4e2-43b8-9b6a-f7703834bfb1|7e925638-3656-47ed-8b6d-849784f24c44",
+          ""
+        ],
+        [
+          "clearance|166750000|85387500|f691934b-e4e2-43b8-9b6a-f7703834bfb1|05b883ec-9b45-43c7-a5e8-e561d500197e",
+          ""
+        ],
+        [
+          "clearance|167250000|83062500|678aca3c-990c-4d13-be0d-36fcb3c09720|b5f13740-22d4-4a10-8a7d-7670cbed4ab8",
+          ""
+        ],
+        [
+          "clearance|167250000|85387500|05b883ec-9b45-43c7-a5e8-e561d500197e|3a8eebd9-0ca6-4848-86db-be3c65c4c719",
+          ""
+        ],
+        [
+          "clearance|167600000|83062500|b5f13740-22d4-4a10-8a7d-7670cbed4ab8|f9f3acab-7f47-444e-8c29-e76e8f6dca69",
+          ""
+        ],
+        [
+          "clearance|167600000|83912500|490b056f-f05b-4b2f-9c27-736633383bd8|f9f3acab-7f47-444e-8c29-e76e8f6dca69",
+          ""
+        ],
+        [
+          "clearance|167600000|84587500|afa4ce24-2707-4e63-9402-48f272edf247|3a8eebd9-0ca6-4848-86db-be3c65c4c719",
+          ""
+        ],
+        [
+          "invalid_outline|116750000|75787456|16d16864-efe3-48a2-937d-0234b66f96b9|ad9fb64b-8993-417c-b854-4260380756a9",
+          ""
         ]
       ],
       "meta": {

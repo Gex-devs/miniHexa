@@ -182,6 +182,11 @@ static void APP_wifi_scan_cb(int32_t status, W6X_WiFi_Scan_Result_t *Scan_result
 int32_t APP_shell_quit(int32_t argc, char **argv);
 #endif /* SHELL_ENABLE */
 
+/**
+  * @brief  Initialize the low power manager
+  */
+void LowPowerManagerInit(void);
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -211,6 +216,10 @@ void main_app(void)
   uint16_t ping_count = 4;
   uint32_t average_ping = 0;
   uint16_t ping_received_response = 0;
+
+#if (LOW_POWER_MODE > LOW_POWER_DISABLE)
+  LowPowerManagerInit();
+#endif /* LOW_POWER_MODE */
 
   /* Initialize the logging utilities */
   LoggingInit();
@@ -543,6 +552,47 @@ int32_t APP_shell_quit(int32_t argc, char **argv)
 
 SHELL_CMD_EXPORT_ALIAS(APP_shell_quit, quit, quit. Stop application execution);
 #endif /* SHELL_ENABLE */
+
+void LowPowerManagerInit(void)
+{
+  /* USER CODE BEGIN LowPowerManagerInit_1 */
+
+  /* USER CODE END LowPowerManagerInit_1 */
+
+#if (LOW_POWER_MODE > LOW_POWER_DISABLE)
+  /* Init low power manager */
+  UTIL_LPM_Init();
+
+  /* USER CODE BEGIN LowPowerManagerInit_2 */
+
+  /* USER CODE END LowPowerManagerInit_2 */
+
+#if (DEBUGGER_ENABLED == 1)
+  HAL_DBGMCU_EnableDBGStopMode();
+  HAL_DBGMCU_EnableDBGStandbyMode();
+#else
+  HAL_DBGMCU_DisableDBGStopMode();
+  HAL_DBGMCU_DisableDBGStandbyMode();
+#endif /* DEBUGGER_ENABLED */
+
+  /* USER CODE BEGIN LowPowerManagerInit_3 */
+
+  /* USER CODE END LowPowerManagerInit_3 */
+
+#if (LOW_POWER_MODE < LOW_POWER_STDBY_ENABLE)
+  /* Disable Stand-by mode */
+  UTIL_LPM_SetOffMode((1UL << CFG_LPM_APPLI_ID), UTIL_LPM_DISABLE);
+#endif /* LOW_POWER_MODE */
+#if (LOW_POWER_MODE < LOW_POWER_STOP_ENABLE)
+  /* Disable Stop Mode */
+  UTIL_LPM_SetStopMode((1UL << CFG_LPM_APPLI_ID), UTIL_LPM_DISABLE);
+#endif /* LOW_POWER_MODE */
+#endif /* LOW_POWER_MODE */
+
+  /* USER CODE BEGIN LowPowerManagerInit_End */
+
+  /* USER CODE END LowPowerManagerInit_End */
+}
 
 /* USER CODE BEGIN PFD */
 

@@ -5342,6 +5342,30 @@
 			)
 		)
 	)
+	(global_label "CHIP_EN"
+		(shape input)
+		(at 120.65 59.69 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b76592a0-25d5-4646-9d1a-590dfc86f1e9")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 131.5576 59.69 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "SPI_RDY"
 		(shape input)
 		(at 85.09 87.63 180)
@@ -5435,6 +5459,30 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+	)
+	(global_label "CHIP_EN"
+		(shape input)
+		(at 175.26 71.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "fd450c91-9054-4f02-8937-97f12a8a24a5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 164.3524 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 	)
@@ -6388,6 +6436,7 @@
 	(symbol
 		(lib_id "Device:C")
 		(at 261.62 54.61 0)
+		(mirror y)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6397,7 +6446,7 @@
 		(dnp no)
 		(uuid "217ff775-96d5-475d-b77c-597c5b061822")
 		(property "Reference" "C33"
-			(at 253.746 50.038 0)
+			(at 269.494 50.038 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6408,7 +6457,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 253.746 52.578 0)
+			(at 269.494 52.578 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6418,8 +6467,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 262.5852 58.42 0)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 260.6548 58.42 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8448,83 +8497,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3.3V")
-		(at 175.26 71.12 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "87f8bdf7-fabe-4dd9-b089-2408f994eb71")
-		(property "Reference" "#PWR069"
-			(at 179.07 71.12 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 170.434 69.596 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 175.26 71.12 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 175.26 71.12 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 175.26 71.12 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "0d3b1940-afbd-416b-988f-f3051dca40d6")
-		)
-		(instances
-			(project "miniHexa"
-				(path "/3449ee66-2977-4802-a474-0821cdf4e79b"
-					(reference "#PWR069")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 52.07 24.13 0)
 		(unit 1)
@@ -10132,7 +10104,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 160.9852 68.58 0)
 			(hide yes)
 			(show_name no)
@@ -10648,7 +10620,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 167.3352 50.8 0)
 			(hide yes)
 			(show_name no)

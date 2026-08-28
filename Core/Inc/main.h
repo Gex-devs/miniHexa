@@ -54,16 +54,23 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 void MX_SPI1_Init(void);
+void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define UART2_LOG_TX_Pin GPIO_PIN_2
+#define UART2_LOG_TX_GPIO_Port GPIOA
+#define UART2_LOG_RX_Pin GPIO_PIN_3
+#define UART2_LOG_RX_GPIO_Port GPIOA
 #define SPI_CS_Pin GPIO_PIN_12
 #define SPI_CS_GPIO_Port GPIOB
 #define SPI_RDY_Pin GPIO_PIN_9
 #define SPI_RDY_GPIO_Port GPIOC
+#define CHIP_EN_Pin GPIO_PIN_8
+#define CHIP_EN_GPIO_Port GPIOA
 #define USER_BUTTON_Pin GPIO_PIN_11
 #define USER_BUTTON_GPIO_Port GPIOA
 #define SERVO_TX_Pin GPIO_PIN_6
