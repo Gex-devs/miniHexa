@@ -1,0 +1,429 @@
+/**
+  ******************************************************************************
+  * @file    logging.c
+  * @author  ST67 Application Team
+  * @brief   This file is part of the FreeRTOS logging interface
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2024 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+
+/**
+  * Portions of this file are based on FreeRTOS, which is licensed under the MIT license as indicated below.
+  * See https://www.FreeRTOS.org/logging.html for more information.
+  *
+  * Reference source:
+  * https://github.com/FreeRTOS/FreeRTOS/blob/main/FreeRTOS-Plus/Demo/Common/Logging/windows/Logging_WinSim.c
+  */
+
+/*
+ * FreeRTOS V202212.00
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
+ *
+ */
+
+/* Includes ------------------------------------------------------------------*/
+#include <inttypes.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
+#include <ctype.h>
+
+/* FreeRTOS includes. */
+#include "FreeRTOS.h"
+#include "queue.h"
+#include "task.h"
+#include "semphr.h"
+/* Project Includes */
+#include "logging_config.h"
+#include "logging.h"
+
+/* Private default defines -----------------------------------------------------------*/
+/** @defgroup ST67W6X_Utilities_Logging_Defines ST67W6X Utility Logging Configuration
+  * @ingroup  ST67W6X_Utilities_Logging
+  * @{
+  */
+/* Can be configured in #include "logging_config.h" */
+
+#ifndef LOG_INCLUDE_TASKNAME
+/** Enable 'task name' metadata in the log */
+#define LOG_INCLUDE_TASKNAME                    1
+#endif /* LOG_INCLUDE_TASKNAME */
+
+#ifndef LOG_INCLUDE_FILENAME
+/** Enable 'file name' + 'line number' metadata in the log */
+#define LOG_INCLUDE_FILENAME                    1
+#endif /* LOG_INCLUDE_FILENAME */
+
+#ifndef LOG_INCLUDE_TIMESTAMP
+/** Enable 'timestamp' metadata in the log */
+#define LOG_INCLUDE_TIMESTAMP                   1
+#endif /* LOG_INCLUDE_TIMESTAMP */
+
+#ifndef LOG_INCLUDE_MAX_LENGTH
+/** Max metadata length */
+#define LOG_INCLUDE_MAX_LENGTH                  100U
+#endif /* LOG_INCLUDE_MAX_LENGTH */
+
+#ifndef MAX_LOG_MESSAGE_LENGTH
+/** Max message length */
+#define MAX_LOG_MESSAGE_LENGTH                  2000U
+#endif /* MAX_LOG_MESSAGE_LENGTH */
+
+#ifndef MAX_LOG_QUEUE_LENGTH
+/** Max queue length */
+#define MAX_LOG_QUEUE_LENGTH                    200U
+#endif /* MAX_LOG_QUEUE_LENGTH */
+
+#ifndef MAX_LOG_LEVEL
+/** Max log level */
+#define MAX_LOG_LEVEL                           LOG_DEBUG
+#endif /* MAX_LOG_LEVEL */
+
+#ifndef MAX_LOG_MEMORY
+/** Max log level */
+#define MAX_LOG_MEMORY                          4096U
+#endif /* MAX_LOG_MEMORY */
+
+#ifndef LOG_MESSAGE_ID
+/** Log id. must be unique per queue producer */
+#define LOG_MESSAGE_ID                          1U
+#endif /* LOG_MESSAGE_ID */
+
+#ifndef LOG_THREAD_STACK_SIZE
+/** Log thread stack size */
+#define LOG_THREAD_STACK_SIZE                   256U
+#endif /* LOG_THREAD_STACK_SIZE */
+
+#ifndef LOG_THREAD_PRIO
+/** Log thread priority */
+#define LOG_THREAD_PRIO                         25
+#endif /* LOG_THREAD_PRIO */
+
+#ifndef LOG_MALLOC
+/** Log memory allocator */
+#define LOG_MALLOC                              pvPortMalloc
+#endif /* LOG_MALLOC */
+
+#ifndef LOG_FREE
+/** Log memory deallocator */
+#define LOG_FREE                                vPortFree
+#endif /* LOG_FREE */
+
+#if LOG_INCLUDE_MAX_LENGTH >= MAX_LOG_MESSAGE_LENGTH
+#error "LOG_INCLUDE_MAX_LENGTH must be lower than MAX_LOG_MESSAGE_LENGTH to ensure space for the log message"
+#endif /* LOG_INCLUDE_MAX_LENGTH check */
+/** @} */
+
+/* Private typedef -----------------------------------------------------------*/
+/** @defgroup ST67W6X_Utilities_Logging_Types ST67W6X Utility Logging Types
+  * @ingroup  ST67W6X_Utilities_Logging
+  * @{
+  */
+
+/**
+  * @brief  Logging message structure
+  */
+typedef struct
+{
+  uint32_t message_id;    /*!< Log id. must be unique per queue producer */
+  uint32_t message_len;   /*!< Length of the message */
+  char *message;          /*!< Pointer to the message */
+} LogMessage_t;
+
+/**
+  * @brief  LoggingConfig_t structure definition
+  */
+typedef struct
+{
+  uint32_t VerboseLogLevel;                 /*!< Log level */
+  uint32_t allocated_log_mem;               /*!< Allocated log memory */
+  void (*log_output)(const char *message);  /*!< Log output callback */
+} LoggingConfig_t;
+
+/** @} */
+
+/*Private variables -----------------------------------------------------------*/
+/** @defgroup ST67W6X_Utilities_Logging_Variables ST67W6X Utility Logging Variables
+  * @ingroup  ST67W6X_Utilities_Logging
+  * @{
+  */
+
+/**
+  * @brief  Queue handle for logging messages
+  */
+static QueueHandle_t LoggingQueue = NULL;
+
+/**
+  * @brief  Output task handle
+  */
+static TaskHandle_t OutputTaskHandle;
+
+/**
+  * @brief  Log level strings
+  */
+static const char *logLevelStrings[] =
+{
+  "NONE",
+  "ERROR",
+  "WARN",
+  "INFO",
+  "DEBUG"
+};
+
+/**
+  * @brief  LoggingConfig_t structure definition
+  */
+static LoggingConfig_t LoggingConfig =
+{
+  .VerboseLogLevel = LOG_LEVEL,
+  .log_output = NULL,
+  .allocated_log_mem = 0
+};
+
+/** @} */
+
+/* Private function prototypes -----------------------------------------------*/
+/** @addtogroup ST67W6X_Utilities_Logging_Functions ST67W6X Utility Logging Functions
+  * @ingroup  ST67W6X_Utilities_Logging
+  * @{
+  */
+
+/**
+  * @brief  Logging print task pushing the log message in the queue to the output callback
+  * @param  pvParameters: Task parameter
+  */
+static void OutputTask(void *pvParameters);
+
+/* Functions Definition ------------------------------------------------------*/
+void *vLoggingInit(void (*LogOutput_cb)(const char *message))
+{
+  BaseType_t status;
+  /* Default setting */
+  LoggingConfig.VerboseLogLevel = LOG_DEBUG;
+  LoggingConfig.allocated_log_mem = 0;
+
+  LoggingQueue = NULL;
+
+  if (LogOutput_cb != NULL)
+  {
+    LoggingConfig.log_output = LogOutput_cb;
+    LoggingQueue = xQueueCreate(MAX_LOG_QUEUE_LENGTH, sizeof(LogMessage_t *));
+    if (LoggingQueue == NULL)
+    {
+      (void)printf("Log queue creation failed\n");
+      return NULL;
+    }
+    status = xTaskCreate(OutputTask, "OutputTask", LOG_THREAD_STACK_SIZE >> 2U, NULL,
+                         LOG_THREAD_PRIO, &OutputTaskHandle);
+    if (status != pdPASS)
+    {
+      vQueueDelete(LoggingQueue);
+      LoggingQueue = NULL;
+      (void)printf("Log task creation failed\n");
+      return NULL;
+    }
+  }
+  return LoggingQueue;
+}
+
+void vLoggingSetVerbosity(uint32_t level)
+{
+  if (level <= MAX_LOG_LEVEL)
+  {
+    LoggingConfig.VerboseLogLevel = level;
+  }
+}
+
+void vLoggingPrintf(uint32_t log_level, const uint8_t metadata_print, const uint32_t line_number,
+                    const char *const p_file_name, const char *const p_format, ...)
+{
+  int32_t offset = 0;
+  va_list args;
+  char log_include_str[LOG_INCLUDE_MAX_LENGTH] = {0};
+  char dummy_str[2]; /* Dummy string for format length calculation */
+
+  if ((log_level > LoggingConfig.VerboseLogLevel) || (log_level > MAX_LOG_LEVEL))
+  {
+    return;  /* Filter out messages above the threshold */
+  }
+
+  if (LoggingConfig.allocated_log_mem > MAX_LOG_MEMORY)
+  {
+    (void)printf("Max log malloc reached\n");
+    return;
+  }
+
+  /* Allocate memory for the log structure */
+  LogMessage_t *newLog = (LogMessage_t *)LOG_MALLOC(sizeof(LogMessage_t));
+  if (newLog == NULL)
+  {
+    (void)printf("Log malloc failed\n");
+    return;
+  }
+
+  va_start(args, p_format);
+
+  if (metadata_print != 0U)
+  {
+    offset += snprintf(log_include_str, LOG_INCLUDE_MAX_LENGTH, "[%s] ", logLevelStrings[log_level]);
+
+#if LOG_INCLUDE_TIMESTAMP
+    /* Get the current timestamp and task name (if required) */
+    uint32_t timestamp = xTaskGetTickCount();
+    offset += snprintf(&log_include_str[offset], LOG_INCLUDE_MAX_LENGTH - offset, "[%" PRIu32 "] ", timestamp);
+#endif /* LOG_INCLUDE_TIMESTAMP */
+
+#if LOG_INCLUDE_TASKNAME
+    const char *taskName = pcTaskGetName(xTaskGetCurrentTaskHandle());
+    if ((taskName) && (offset < LOG_INCLUDE_MAX_LENGTH))
+    {
+      offset += snprintf(&log_include_str[offset], LOG_INCLUDE_MAX_LENGTH - offset, "[%s] ", taskName);
+    }
+#endif /* LOG_INCLUDE_TASKNAME */
+
+#if LOG_INCLUDE_FILENAME
+    if ((offset < LOG_INCLUDE_MAX_LENGTH) && (p_file_name != NULL) && (line_number != 0U))
+    {
+      /* Extract the filename if p_file_name contains a full path */
+      char *p_file = (char *)p_file_name;
+      char *lastSlash = strrchr(p_file, '/');
+      if (lastSlash != NULL)
+      {
+        p_file = lastSlash + 1; /* Move past the '/' */
+      }
+      else
+      {
+        lastSlash = strrchr(p_file, '\\');
+        if (lastSlash != NULL)
+        {
+          p_file = lastSlash + 1; /* Move past the '\\' */
+        }
+      }
+
+      offset += snprintf(&log_include_str[offset], LOG_INCLUDE_MAX_LENGTH - offset,
+                         "(%s:%" PRIu32 ") ",
+                         p_file, line_number);
+    }
+#endif /* LOG_INCLUDE_FILENAME */
+  }
+
+  configASSERT(offset < LOG_INCLUDE_MAX_LENGTH);
+
+  /* Calculate the log message size */
+  int32_t alloc_len = vsnprintf(dummy_str, sizeof(dummy_str), p_format, args); /*Get format length */
+  alloc_len += offset + 1U; /* offset for log include string + 1 for \0 */
+
+  /* Max alloc_len is MAX_LOG_MESSAGE_LENGTH */
+  if (alloc_len > MAX_LOG_MESSAGE_LENGTH)
+  {
+    alloc_len = MAX_LOG_MESSAGE_LENGTH;
+  }
+
+  /* Allocate memory for the log message */
+  newLog->message = (char *)LOG_MALLOC(alloc_len);
+  if (newLog->message == NULL)
+  {
+    LOG_FREE(newLog);
+    (void)printf("Log message malloc failed\n");
+    va_end(args);
+    return;
+  }
+
+  /* Track log memory allocation */
+  LoggingConfig.allocated_log_mem += alloc_len;
+  newLog->message_len = alloc_len;
+
+  (void)strncpy(newLog->message, log_include_str, offset + 1U);
+
+  offset += vsnprintf(newLog->message + offset, alloc_len - offset, p_format, args);
+
+  va_end(args);
+
+  newLog->message[offset] = '\0';
+
+  newLog->message_id = LOG_MESSAGE_ID;
+
+  /* Send the log to the queue */
+  if (xQueueSendToBack(LoggingQueue, &newLog, 0) != pdPASS)
+  {
+    LOG_FREE(newLog->message);
+    LOG_FREE(newLog);
+    (void)printf("Log queue full, message dropped\n");
+  }
+}
+
+void vLoggingDeInit(void)
+{
+  if (OutputTaskHandle != NULL)
+  {
+    vTaskDelete(OutputTaskHandle);
+  }
+
+  if (LoggingQueue != NULL)
+  {
+    /* Check Queue empty to clean? */
+    vQueueDelete(LoggingQueue);
+  }
+}
+/* Private Functions Definition ----------------------------------------------*/
+static void OutputTask(void *pvParameters)
+{
+  LogMessage_t *receivedLog = NULL;
+
+  for (;;)
+  {
+    /* Wait for a log message from the queue */
+    if (xQueueReceive(LoggingQueue, &receivedLog, portMAX_DELAY) == pdPASS)
+    {
+      if ((receivedLog != NULL) && (receivedLog->message != NULL))
+      {
+        if (LoggingConfig.log_output != NULL)
+        {
+          LoggingConfig.log_output(receivedLog->message);
+          (void)fflush(stdout);
+        }
+        /* Free the memory after transfer completes */
+        LOG_FREE(receivedLog->message);
+        LOG_FREE(receivedLog);
+
+        if ((receivedLog->message_id == LOG_MESSAGE_ID) &&
+            (LoggingConfig.allocated_log_mem >= receivedLog->message_len))
+        {
+          LoggingConfig.allocated_log_mem -= receivedLog->message_len;
+        }
+      }
+    }
+  }
+}
+
+/** @} */
