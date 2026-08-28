@@ -44,3 +44,7 @@ build
 
 #generated libraries 
 Drivers
+
+#Stm32 middlewares
+Middlewares
+
