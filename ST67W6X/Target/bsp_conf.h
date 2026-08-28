@@ -39,24 +39,13 @@ extern "C" {
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
-/** Interfaces the UART instance to be used for logging communication */
-#define UART_HANDLE                             huart1
-
-/** Interfaces the SPI instance to be used for NCP communication */
-#define NCP_SPI_HANDLE                          hspi1
+#error "SPI instance not selected. Please use platform settings panel in STM32CubeMX GUI."
 
 /* USER CODE BEGIN EC */
 
 /* USER CODE END EC */
 
 /* Global variables ----------------------------------------------------------*/
-/** SPI handle */
-extern SPI_HandleTypeDef NCP_SPI_HANDLE;
-
-/** UART handle */
-#ifdef UART_HANDLE
-extern UART_HandleTypeDef UART_HANDLE;
-#endif /* UART_HANDLE */
 
 /* USER CODE BEGIN GV */
 
