@@ -49,8 +49,6 @@ extern "C" {
 
 /* USER CODE END EM */
 
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
-
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 void MX_SPI1_Init(void);
@@ -67,8 +65,11 @@ void MX_USART2_UART_Init(void);
 #define UART2_LOG_RX_GPIO_Port GPIOA
 #define SPI_CS_Pin GPIO_PIN_12
 #define SPI_CS_GPIO_Port GPIOB
-#define SPI_RDY_Pin GPIO_PIN_9
+#define SPI_RDY_Pin GPIO_PIN_8
 #define SPI_RDY_GPIO_Port GPIOC
+#define IMU_INT_Pin GPIO_PIN_9
+#define IMU_INT_GPIO_Port GPIOC
+#define IMU_INT_EXTI_IRQn EXTI9_5_IRQn
 #define CHIP_EN_Pin GPIO_PIN_8
 #define CHIP_EN_GPIO_Port GPIOA
 #define USER_BUTTON_Pin GPIO_PIN_11
