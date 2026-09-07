@@ -26,7 +26,6 @@
 #include <custom_bus.h>
 #include <lsm6dsl_reg.h>
 
-#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,9 +56,9 @@ UART_HandleTypeDef huart6;
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
-  .name = "defaultTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+    .name = "defaultTask",
+    .stack_size = 128 * 4,
+    .priority = (osPriority_t)osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
 /* USER CODE END PV */
@@ -85,6 +84,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == GPIO_PIN_9)
   {
+
+    float SenestivityMultiplierGyro = 0.008750f;
+    float SenestivityMultiplierAcc = 0.000061f;
     // GYRO data ready interrupt
     MDI_input_t data_in;
     MDI_output_t data_out;
@@ -97,8 +99,26 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
     if (newData)
     {
-      // TODO: Read raw acc and gyro scope data
-      
+      uint8_t gyro_raw[5] = {0};
+
+      BSP_I2C1_ReadReg(LSM6DSL_ACC_GYRO_I2C_ADDRESS_LOW,
+                       LSM6DSL_ACC_GYRO_OUTX_L_G,
+                       &gyro_raw[0],
+                       sizeof(gyro_raw));
+
+      data_in.Gyro[0] = ((gyro_raw[1] << 8) & gyro_raw[0]) * SenestivityMultiplierGyro;
+      data_in.Gyro[1] = ((gyro_raw[3] << 8) & gyro_raw[2]) * SenestivityMultiplierGyro;
+      data_in.Gyro[2] = ((gyro_raw[5] << 8) & gyro_raw[4]) * SenestivityMultiplierGyro;
+
+      uint8_t acc_raw[5] = {0};
+      BSP_I2C1_ReadReg(LSM6DSL_ACC_GYRO_I2C_ADDRESS_LOW,
+                       LSM6DSL_ACC_GYRO_OUTX_L_XL,
+                       &acc_raw[0],
+                       sizeof(acc_raw));
+
+      data_in.Acc[0] = ((acc_raw[1] << 8) & acc_raw[0]) * SenestivityMultiplierAcc;
+      data_in.Acc[1] = ((acc_raw[3] << 8) & acc_raw[2]) * SenestivityMultiplierAcc;
+      data_in.Acc[2] = ((acc_raw[5] << 8) & acc_raw[4]) * SenestivityMultiplierAcc;
 
       MotionDI_update(&data_out, &data_in);
     }
@@ -107,7 +127,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 void IMU_Init(void)
 {
-  float odr_freq = 100.0f; // khz
+  float odr_freq = 416.0f; // khz
   MotionDI_Initialize(&odr_freq);
 
   // Enable Interrupt pin 1 on Gryo data ready
@@ -119,13 +139,25 @@ void IMU_Init(void)
   BSP_I2C1_WriteReg(LSM6DSL_ACC_GYRO_I2C_ADDRESS_LOW, LSM6DSL_ACC_GYRO_CTRL2_G, &HIGH_PERF_GYRO_ACC, sizeof(HIGH_PERF_GYRO_ACC));
   BSP_I2C1_WriteReg(LSM6DSL_ACC_GYRO_I2C_ADDRESS_LOW, LSM6DSL_ACC_GYRO_CTRL1_XL, &HIGH_PERF_GYRO_ACC, sizeof(HIGH_PERF_GYRO_ACC));
 
+  // WARNING: Value recieved from AI, might be incorrect.
+  uint8_t FS_G_MASK = 0b11110000; // Set Full-scale factor to +-250dps
+  uint8_t CTRL2_G_VALUE = 0;
+  BSP_I2C1_ReadReg(LSM6DSL_ACC_GYRO_I2C_ADDRESS_LOW, LSM6DSL_ACC_GYRO_CTRL2_G, &CTRL2_G_VALUE, sizeof(CTRL2_G_VALUE));
+  CTRL2_G_VALUE &= FS_G_MASK;
+  BSP_I2C1_WriteReg(LSM6DSL_ACC_GYRO_I2C_ADDRESS_LOW, LSM6DSL_ACC_GYRO_CTRL2_G, &CTRL2_G_VALUE, sizeof(int8_t));
+
+  uint8_t FS_XL_MASK = 0b11111100; // Set Full-scale to +-2g
+  uint8_t CTRL1_XL_VALUE = 0;
+  BSP_I2C1_ReadReg(LSM6DSL_ACC_GYRO_I2C_ADDRESS_LOW, LSM6DSL_ACC_GYRO_CTRL1_XL, &CTRL1_XL_VALUE, sizeof(CTRL1_XL_VALUE));
+  CTRL1_XL_VALUE &= FS_XL_MASK;
+  BSP_I2C1_WriteReg(LSM6DSL_ACC_GYRO_I2C_ADDRESS_LOW, LSM6DSL_ACC_GYRO_CTRL1_XL, &CTRL1_XL_VALUE, sizeof(int8_t));
 }
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void)
 {
 
@@ -207,22 +239,22 @@ int main(void)
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Configure the main internal regulator output voltage
-  */
+   */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
   /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
+   * in the RCC_OscInitTypeDef structure.
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -238,9 +270,8 @@ void SystemClock_Config(void)
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+   */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -253,10 +284,10 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief CRC Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief CRC Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_CRC_Init(void)
 {
 
@@ -275,14 +306,13 @@ static void MX_CRC_Init(void)
   /* USER CODE BEGIN CRC_Init 2 */
 
   /* USER CODE END CRC_Init 2 */
-
 }
 
 /**
-  * @brief I2S3 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief I2S3 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_I2S3_Init(void)
 {
 
@@ -309,14 +339,13 @@ static void MX_I2S3_Init(void)
   /* USER CODE BEGIN I2S3_Init 2 */
 
   /* USER CODE END I2S3_Init 2 */
-
 }
 
 /**
-  * @brief SPI1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief SPI1 Initialization Function
+ * @param None
+ * @retval None
+ */
 void MX_SPI1_Init(void)
 {
 
@@ -347,14 +376,13 @@ void MX_SPI1_Init(void)
   /* USER CODE BEGIN SPI1_Init 2 */
 
   /* USER CODE END SPI1_Init 2 */
-
 }
 
 /**
-  * @brief USART1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief USART1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_USART1_UART_Init(void)
 {
 
@@ -380,14 +408,13 @@ static void MX_USART1_UART_Init(void)
   /* USER CODE BEGIN USART1_Init 2 */
 
   /* USER CODE END USART1_Init 2 */
-
 }
 
 /**
-  * @brief USART2 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief USART2 Initialization Function
+ * @param None
+ * @retval None
+ */
 void MX_USART2_UART_Init(void)
 {
 
@@ -413,14 +440,13 @@ void MX_USART2_UART_Init(void)
   /* USER CODE BEGIN USART2_Init 2 */
 
   /* USER CODE END USART2_Init 2 */
-
 }
 
 /**
-  * @brief USART6 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief USART6 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_USART6_UART_Init(void)
 {
 
@@ -446,14 +472,13 @@ static void MX_USART6_UART_Init(void)
   /* USER CODE BEGIN USART6_Init 2 */
 
   /* USER CODE END USART6_Init 2 */
-
 }
 
 /**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief GPIO Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -541,13 +566,13 @@ void StartDefaultTask(void *argument)
 }
 
 /**
-  * @brief  Period elapsed callback in non blocking mode
-  * @note   This function is called  when TIM1 interrupt took place, inside
-  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-  * a global variable "uwTick" used as application time base.
-  * @param  htim : TIM handle
-  * @retval None
-  */
+ * @brief  Period elapsed callback in non blocking mode
+ * @note   This function is called  when TIM1 interrupt took place, inside
+ * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+ * a global variable "uwTick" used as application time base.
+ * @param  htim : TIM handle
+ * @retval None
+ */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
@@ -563,9 +588,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -578,12 +603,12 @@ void Error_Handler(void)
 }
 #ifdef USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
