@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    bsp_conf.h
+  * @file    logshell_ctrl.h
   * @author  ST67 Application Team
-  * @brief   This file contains definitions for the BSP interface
+  * @brief   Header for logshell_ctrl module
   ******************************************************************************
   * @attention
   *
@@ -19,16 +19,14 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef BSP_CONF_H
-#define BSP_CONF_H
+#ifndef LOGSHELL_CTRL_H
+#define LOGSHELL_CTRL_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
-
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
@@ -39,31 +37,43 @@ extern "C" {
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
-/** Interfaces the UART instance to be used for logging communication */
-#define UART_HANDLE                             huart2
-
-/** Interfaces the SPI instance to be used for NCP communication */
-#define NCP_SPI_HANDLE                          hspi1
-
 /* USER CODE BEGIN EC */
 
 /* USER CODE END EC */
 
-/* Global variables ----------------------------------------------------------*/
-/** SPI handle */
-extern SPI_HandleTypeDef NCP_SPI_HANDLE;
+/* Exported variables --------------------------------------------------------*/
+/* USER CODE BEGIN EV */
 
-/** UART handle */
-#ifdef UART_HANDLE
-extern UART_HandleTypeDef UART_HANDLE;
-#endif /* UART_HANDLE */
+/* USER CODE END EV */
 
-/* USER CODE BEGIN GV */
+/* Exported macros -----------------------------------------------------------*/
+/* USER CODE BEGIN EM */
 
-/* USER CODE END GV */
+/* USER CODE END EM */
+
+/* Exported functions --------------------------------------------------------*/
+/**
+  * @brief  Log output to redirect print on user defined output
+  * @param  message: Message to log
+  */
+void LogOutput(const char *message);
+
+/**
+  * @brief  Initialize the logging
+  */
+void LoggingInit(void);
+
+/**
+  * @brief  Initialize the shell
+  */
+void ShellInit(void);
+
+/* USER CODE BEGIN EF */
+
+/* USER CODE END EF */
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#endif /* BSP_CONF_H */
+#endif /* LOGSHELL_CTRL_H */

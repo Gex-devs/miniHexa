@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    bsp_conf.h
+  * @file    echo.h
   * @author  ST67 Application Team
-  * @brief   This file contains definitions for the BSP interface
+  * @brief   Echo test definition
   ******************************************************************************
   * @attention
   *
@@ -19,15 +19,15 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef BSP_CONF_H
-#define BSP_CONF_H
+#ifndef ECHO_H
+#define ECHO_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include <stdint.h>
 
 /* USER CODE BEGIN Includes */
 
@@ -39,31 +39,36 @@ extern "C" {
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
-/** Interfaces the UART instance to be used for logging communication */
-#define UART_HANDLE                             huart2
-
-/** Interfaces the SPI instance to be used for NCP communication */
-#define NCP_SPI_HANDLE                          hspi1
-
 /* USER CODE BEGIN EC */
 
 /* USER CODE END EC */
 
-/* Global variables ----------------------------------------------------------*/
-/** SPI handle */
-extern SPI_HandleTypeDef NCP_SPI_HANDLE;
+/* Exported variables --------------------------------------------------------*/
+/* USER CODE BEGIN EV */
 
-/** UART handle */
-#ifdef UART_HANDLE
-extern UART_HandleTypeDef UART_HANDLE;
-#endif /* UART_HANDLE */
+/* USER CODE END EV */
 
-/* USER CODE BEGIN GV */
+/* Exported macros -----------------------------------------------------------*/
+/* USER CODE BEGIN EM */
 
-/* USER CODE END GV */
+/* USER CODE END EM */
+
+/* Exported functions --------------------------------------------------------*/
+/**
+  * Echo the echo server specified in the code
+  * @param  argc: number of arguments
+  * @param  argv: pointer to the arguments
+  * @retval 0 on success
+  * @retval -1 otherwise
+  */
+int32_t echo_sizes_loop(int32_t argc, char **argv);
+
+/* USER CODE BEGIN EF */
+
+/* USER CODE END EF */
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#endif /* BSP_CONF_H */
+#endif /* ECHO_H */

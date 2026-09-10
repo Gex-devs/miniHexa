@@ -33,6 +33,32 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /** ============================
+  * AT Wi-Fi
+  * All available configuration defines in
+  * Middlewares\ST\ST67W6X_Network_Driver\Driver\W61_at\w61_default_config.h
+  * ============================
+  */
+
+/** Maximum number of detected AP during the scan. Cannot be greater than 50 */
+#define W61_WIFI_MAX_DETECTED_AP                20U
+
+/** Enable/Disable Wi-Fi module logging */
+#define WIFI_LOG_ENABLE                         1
+
+/** ============================
+  * AT Net
+  * All available configuration defines in
+  * Middlewares\ST\ST67W6X_Network_Driver\Driver\W61_at\w61_default_config.h
+  * ============================
+  */
+
+/** Enable IPv6 support : 0: Disabled, 1: Enabled */
+#define W61_NET_IPV6_ENABLE                     0
+
+/** Enable/Disable Network module logging */
+#define NET_LOG_ENABLE                          1
+
+/** ============================
   * AT Common
   * All available configuration defines in
   * Middlewares\ST\ST67W6X_Network_Driver\Driver\W61_at\w61_at_common.h

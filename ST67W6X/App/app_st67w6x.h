@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    bsp_conf.h
+  * @file    app_st67w6x.h
   * @author  ST67 Application Team
-  * @brief   This file contains definitions for the BSP interface
+  * @brief   This file provides code for the configuration of the STMicroelectronics.X-CUBE-ST67W61.1.3.0 instances.
   ******************************************************************************
   * @attention
   *
@@ -19,51 +19,35 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef BSP_CONF_H
-#define BSP_CONF_H
+#ifndef APP_ST67W6X_H
+#define APP_ST67W6X_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
-
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
-
-/* USER CODE END ET */
-
 /* Exported constants --------------------------------------------------------*/
-/** Interfaces the UART instance to be used for logging communication */
-#define UART_HANDLE                             huart2
-
-/** Interfaces the SPI instance to be used for NCP communication */
-#define NCP_SPI_HANDLE                          hspi1
-
 /* USER CODE BEGIN EC */
 
 /* USER CODE END EC */
 
-/* Global variables ----------------------------------------------------------*/
-/** SPI handle */
-extern SPI_HandleTypeDef NCP_SPI_HANDLE;
+/* Exported functions --------------------------------------------------------*/
+/**
+  * @brief  Initialize the ST67W6X instance
+  */
+void MX_ST67W6X_Init(void);
 
-/** UART handle */
-#ifdef UART_HANDLE
-extern UART_HandleTypeDef UART_HANDLE;
-#endif /* UART_HANDLE */
+/* USER CODE BEGIN EF */
 
-/* USER CODE BEGIN GV */
-
-/* USER CODE END GV */
+/* USER CODE END EF */
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#endif /* BSP_CONF_H */
+#endif /* APP_ST67W6X_H */
