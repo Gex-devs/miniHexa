@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    main_app.c
-  * @author  ST67 Application Team
-  * @brief   main_app program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2026 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    main_app.c
+ * @author  ST67 Application Team
+ * @brief   main_app program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2026 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -37,7 +37,7 @@
 
 #include "w6x_api.h"
 #include "common_parser.h" /* Common Parser functions */
-#include "spi_iface.h" /* SPI falling/rising_callback */
+#include "spi_iface.h"     /* SPI falling/rising_callback */
 #include "logging.h"
 #include "shell.h"
 #include "logshell_ctrl.h"
@@ -60,6 +60,7 @@
 #endif /* TEST_AUTOMATION_ENABLE */
 
 /* USER CODE BEGIN Includes */
+#include <imu.h>
 
 /* USER CODE END Includes */
 
@@ -70,22 +71,23 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /**
-  * @brief  Application information structure
-  */
+ * @brief  Application information structure
+ */
 typedef struct
 {
-  char *version;                  /*!< Version of the application */
-  char *name;                     /*!< Name of the application */
+  char *version; /*!< Version of the application */
+  char *name;    /*!< Name of the application */
 } APP_Info_t;
 
 /* USER CODE BEGIN PTD */
+;
 
 /* USER CODE END PTD */
 
 /* Private defines -----------------------------------------------------------*/
-#define EVENT_FLAG_SCAN_DONE   (1UL << 1U)        /*!< Scan done event bitmask */
+#define EVENT_FLAG_SCAN_DONE (1UL << 1U) /*!< Scan done event bitmask */
 
-#define WIFI_SCAN_TIMEOUT      10000              /*!< Delay before to declare the scan in failure */
+#define WIFI_SCAN_TIMEOUT 10000 /*!< Delay before to declare the scan in failure */
 
 /* USER CODE BEGIN PD */
 
@@ -99,10 +101,9 @@ typedef struct
 #define MSTR(x) XSTR(x)
 
 /** Application version */
-#define HOST_APP_VERSION_STR      \
-  MSTR(HOST_APP_VERSION_MAIN) "." \
-  MSTR(HOST_APP_VERSION_SUB1) "." \
-  MSTR(HOST_APP_VERSION_SUB2)
+#define HOST_APP_VERSION_STR  \
+  MSTR(HOST_APP_VERSION_MAIN) \
+  "." MSTR(HOST_APP_VERSION_SUB1) "." MSTR(HOST_APP_VERSION_SUB2)
 
 /* USER CODE BEGIN PM */
 
@@ -120,65 +121,67 @@ static uint8_t quit_msg = 0;
 
 /** Application information */
 static const APP_Info_t app_info =
-{
-  .name = "ST67W6X Wi-Fi Echo",
-  .version = HOST_APP_VERSION_STR
-};
+    {
+        .name = "ST67W6X Wi-Fi Echo",
+        .version = HOST_APP_VERSION_STR};
 
 /* USER CODE BEGIN PV */
+TaskHandle_t imuTaskHandle;
 
+MDI_input_t data_in;
+MDI_output_t data_out;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 /**
-  * @brief  Wi-Fi event callback
-  * @param  event_id: Event ID
-  * @param  event_args: Event arguments
-  */
+ * @brief  Wi-Fi event callback
+ * @param  event_id: Event ID
+ * @param  event_args: Event arguments
+ */
 static void APP_wifi_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
-  * @brief  Network event callback
-  * @param  event_id: Event ID
-  * @param  event_args: Event arguments
-  */
+ * @brief  Network event callback
+ * @param  event_id: Event ID
+ * @param  event_args: Event arguments
+ */
 static void APP_net_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
-  * @brief  MQTT event callback
-  * @param  event_id: Event ID
-  * @param  event_args: Event arguments
-  */
+ * @brief  MQTT event callback
+ * @param  event_id: Event ID
+ * @param  event_args: Event arguments
+ */
 static void APP_mqtt_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
-  * @brief  BLE event callback
-  * @param  event_id: Event ID
-  * @param  event_args: Event arguments
-  */
+ * @brief  BLE event callback
+ * @param  event_id: Event ID
+ * @param  event_args: Event arguments
+ */
 static void APP_ble_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
-  * @brief  W6X error callback
-  * @param  ret_w6x: W6X status
-  * @param  func_name: function name
-  */
+ * @brief  W6X error callback
+ * @param  ret_w6x: W6X status
+ * @param  func_name: function name
+ */
 static void APP_error_cb(W6X_Status_t ret_w6x, char const *func_name);
 
 /**
-  * @brief  Wi-Fi scan callback
-  * @param  status: Scan status
-  * @param  Scan_results: Scan results
-  */
+ * @brief  Wi-Fi scan callback
+ * @param  status: Scan status
+ * @param  Scan_results: Scan results
+ */
 static void APP_wifi_scan_cb(int32_t status, W6X_WiFi_Scan_Result_t *Scan_results);
 
 #if (SHELL_ENABLE == 1)
 /**
-  * @brief  Shell command to quit the application
-  * @param  argc: number of arguments
-  * @param  argv: pointer to the arguments
-  * @retval ::SHELL_STATUS_OK on success
-  */
+ * @brief  Shell command to quit the application
+ * @param  argc: number of arguments
+ * @param  argv: pointer to the arguments
+ * @retval ::SHELL_STATUS_OK on success
+ */
 int32_t APP_shell_quit(int32_t argc, char **argv);
 #endif /* SHELL_ENABLE */
 
@@ -194,6 +197,18 @@ void main_app(void)
 
   /* USER CODE BEGIN main_app_1 */
 
+  static IMUContext_t imuContext;
+
+  imuContext.data_in = &data_in;
+  imuContext.data_out = &data_out;
+  // Create IMU task
+  xTaskCreate(
+      IMUTask,
+      "IMU",
+      IMU_TASK_STACK_SIZE,
+      &imuContext,
+      5,
+      &imuTaskHandle);
   /* USER CODE END main_app_1 */
 
 #if (TEST_AUTOMATION_ENABLE == 1)
@@ -409,33 +424,42 @@ _err:
 
 /* coverity[misra_c_2012_rule_5_8_violation : FALSE] */
 /* coverity[misra_c_2012_rule_8_6_violation : FALSE] */
-// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-// {
-//   /* USER CODE BEGIN HAL_GPIO_EXTI_Callback_1 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  /* USER CODE BEGIN HAL_GPIO_EXTI_Callback_1 */
 
-//   /* USER CODE END HAL_GPIO_EXTI_Callback_1 */
-//   /* Callback when data is available in Network CoProcessor to enable SPI Clock */
-//   if (GPIO_Pin == SPI_RDY_Pin)
-//   {
-//     if (HAL_GPIO_ReadPin(SPI_RDY_GPIO_Port, SPI_RDY_Pin) == GPIO_PIN_SET)
-//     {
-//       (void)spi_on_txn_data_ready();
-//     }
-//     else
-//     {
-//       (void)spi_on_header_ack();
-//     }
-//   }
-//   if (GPIO_Pin == USER_BUTTON_Pin)
-//   {
-//     if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port, USER_BUTTON_Pin) == GPIO_PIN_RESET)
-//     {
-//     }
-//   }
-//   /* USER CODE BEGIN HAL_GPIO_EXTI_Callback_End */
+  /* USER CODE END HAL_GPIO_EXTI_Callback_1 */
+  /* Callback when data is available in Network CoProcessor to enable SPI Clock */
+  if (GPIO_Pin == SPI_RDY_Pin)
+  {
+    if (HAL_GPIO_ReadPin(SPI_RDY_GPIO_Port, SPI_RDY_Pin) == GPIO_PIN_SET)
+    {
+      (void)spi_on_txn_data_ready();
+    }
+    else
+    {
+      (void)spi_on_header_ack();
+    }
+  }
+  if (GPIO_Pin == USER_BUTTON_Pin)
+  {
+    if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port, USER_BUTTON_Pin) == GPIO_PIN_RESET)
+    {
+    }
+  }
+  /* USER CODE BEGIN HAL_GPIO_EXTI_Callback_End */
+  if (GPIO_Pin == GPIO_PIN_9)
+  {
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 
-//   /* USER CODE END HAL_GPIO_EXTI_Callback_End */
-// }
+    vTaskNotifyGiveFromISR(
+        imuTaskHandle,
+        &xHigherPriorityTaskWoken);
+
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+  }
+  /* USER CODE END HAL_GPIO_EXTI_Callback_End */
+}
 
 /* USER CODE BEGIN FD */
 
@@ -464,20 +488,20 @@ static void APP_wifi_cb(W6X_event_id_t event_id, void *event_args)
 
   switch (event_id)
   {
-    case W6X_WIFI_EVT_CONNECTED_ID:
-      break;
+  case W6X_WIFI_EVT_CONNECTED_ID:
+    break;
 
-    case W6X_WIFI_EVT_DISCONNECTED_ID:
-      LogInfo("Station disconnected from Access Point\n");
-      break;
+  case W6X_WIFI_EVT_DISCONNECTED_ID:
+    LogInfo("Station disconnected from Access Point\n");
+    break;
 
-    case W6X_WIFI_EVT_REASON_ID:
-      LogInfo("Reason: %s\n", W6X_WiFi_ReasonToStr(event_args));
-      break;
+  case W6X_WIFI_EVT_REASON_ID:
+    LogInfo("Reason: %s\n", W6X_WiFi_ReasonToStr(event_args));
+    break;
 
-    default:
-      /* Wi-Fi events unmanaged */
-      break;
+  default:
+    /* Wi-Fi events unmanaged */
+    break;
   }
   /* USER CODE BEGIN APP_wifi_cb_End */
 
@@ -494,15 +518,15 @@ static void APP_net_cb(W6X_event_id_t event_id, void *event_args)
 
   switch (event_id)
   {
-    case W6X_NET_EVT_SOCK_DATA_ID:
-      p_param_app_net_cb = (W6X_Net_CbParamData_t *) event_args;
-      LogInfo(" Cb informed app that Wi-Fi %" PRIu32 " bytes available on socket %" PRIu32 ".\n",
-              p_param_app_net_cb->available_data_length, p_param_app_net_cb->socket_id);
-      break;
+  case W6X_NET_EVT_SOCK_DATA_ID:
+    p_param_app_net_cb = (W6X_Net_CbParamData_t *)event_args;
+    LogInfo(" Cb informed app that Wi-Fi %" PRIu32 " bytes available on socket %" PRIu32 ".\n",
+            p_param_app_net_cb->available_data_length, p_param_app_net_cb->socket_id);
+    break;
 
-    default:
-      /* Net events unmanaged */
-      break;
+  default:
+    /* Net events unmanaged */
+    break;
   }
   /* USER CODE BEGIN APP_net_cb_End */
 
@@ -541,7 +565,7 @@ int32_t APP_shell_quit(int32_t argc, char **argv)
   return SHELL_STATUS_OK;
 }
 
-SHELL_CMD_EXPORT_ALIAS(APP_shell_quit, quit, quit. Stop application execution);
+SHELL_CMD_EXPORT_ALIAS(APP_shell_quit, quit, quit.Stop application execution);
 #endif /* SHELL_ENABLE */
 
 /* USER CODE BEGIN PFD */
