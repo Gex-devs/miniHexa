@@ -64,6 +64,7 @@ extern "C" {
 /* Exported macros -----------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 
+#define REMTOE_APP_PORT  4040
 /* USER CODE END EM */
 
 /* Exported functions --------------------------------------------------------*/
