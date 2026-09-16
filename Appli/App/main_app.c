@@ -76,49 +76,59 @@ TaskHandle_t imuTaskHandle;
 MDI_input_t data_in;
 MDI_output_t data_out;
 
+//TODO: Add a task for telemetry 
+osThreadId_t packetRecvTask;
+const osThreadAttr_t packetRecvTask_attributes = {
+  .name = "packetRecv",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
 struct sockaddr_in addr_t = {0};
 int32_t sock;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 /**
- * @brief  Wi-Fi event callback
- * @param  event_id: Event ID
- * @param  event_args: Event arguments
- */
+  * @brief  Wi-Fi event callback
+  * @param  event_id: Event ID
+  * @param  event_args: Event arguments
+  */
 static void APP_wifi_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
- * @brief  Network event callback
- * @param  event_id: Event ID
- * @param  event_args: Event arguments
- */
+  * @brief  Network event callback
+  * @param  event_id: Event ID
+  * @param  event_args: Event arguments
+  */
 static void APP_net_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
- * @brief  MQTT event callback
- * @param  event_id: Event ID
- * @param  event_args: Event arguments
- */
+  * @brief  MQTT event callback
+  * @param  event_id: Event ID
+  * @param  event_args: Event arguments
+  */
 static void APP_mqtt_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
- * @brief  BLE event callback
- * @param  event_id: Event ID
- * @param  event_args: Event arguments
- */
+  * @brief  BLE event callback
+  * @param  event_id: Event ID
+  * @param  event_args: Event arguments
+  */
 static void APP_ble_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
- * @brief  W6X error callback
- * @param  ret_w6x: W6X status
- * @param  func_name: function name
- */
+  * @brief  W6X error callback
+  * @param  ret_w6x: W6X status
+  * @param  func_name: function name
+  */
 static void APP_error_cb(W6X_Status_t ret_w6x, char const *func_name);
 
 /* USER CODE BEGIN PFP */
 
 void APP_init_socket();
+
+void UDP_packet_handler(void *args);
 
 /* USER CODE END PFP */
 
@@ -141,6 +151,11 @@ void main_app(void)
       &imuContext,
       5,
       &imuTaskHandle);
+
+  // create udp packet recv thread
+  
+  packetRecvTask = osThreadNew(UDP_packet_handler, NULL, &packetRecvTask_attributes);
+
   /* USER CODE END main_app_1 */
 
   /* Initialize the logging utilities */
@@ -240,16 +255,13 @@ static void APP_net_cb(W6X_event_id_t event_id, void *event_args)
   /* USER CODE BEGIN APP_net_cb_1 */
   if (event_id == W6X_NET_EVT_SOCK_DATA_ID)
   {
-    char data[5] = "Hallo";
-    W6X_Net_Sendto(
-        sock,
-        data,
-        sizeof(data),
-        0,
-        (struct sockaddr *)&addr_t,
-        sizeof(addr_t));
     // Notify UDP task
-    // Don't do heavy packet processing here
+    // BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    // vTaskNotifyGiveFromISR(
+    //     udpTaskHandle,
+    //     &xHigherPriorityTaskWoken);
+
+    // portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
   }
   /* USER CODE END APP_net_cb_1 */
 }
@@ -280,10 +292,11 @@ static void APP_error_cb(W6X_Status_t ret_w6x, char const *func_name)
 }
 
 /* USER CODE BEGIN PFD */
+// TODO: Create another socket and separate telemetry & command sockets
 void APP_init_socket()
 {
 
-  uint8_t remote_app_server_addr[4] = {192, 168, 0, 30};
+  uint8_t remote_app_server_addr[4] = {192, 168, 0, 1};
 
   uint16_t remote_app_port = REMTOE_APP_PORT;
 
@@ -317,6 +330,35 @@ end:
     {
       LogInfo("Socket closed\n");
     }
+  }
+}
+
+void UDP_packet_handler(void *args)
+{
+
+  for (;;)
+  {
+
+    ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+
+    char data[5] = "hallo";
+
+    W6X_Net_Sendto(
+        sock,
+        data,
+        sizeof(data),
+        0,
+        (struct sockaddr *)&addr_t,
+        sizeof(addr_t));
+
+    uint8_t bufferp[512];
+    int32_t len = W6X_Net_Recv(sock, &bufferp, sizeof(bufferp), 0);
+
+    if (len > 0) // there's data
+    {
+      /* code */
+    }
+
   }
 }
 /* USER CODE END PFD */
