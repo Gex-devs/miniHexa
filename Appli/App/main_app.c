@@ -71,62 +71,68 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
+extern UART_HandleTypeDef huart1;
+
+uint8_t rx_byte;
+
 TaskHandle_t imuTaskHandle;
 
 MDI_input_t data_in;
 MDI_output_t data_out;
 
-//TODO: Add a task for telemetry 
+// TODO: Add a task for telemetry
 osThreadId_t packetRecvTask;
 const osThreadAttr_t packetRecvTask_attributes = {
-  .name = "packetRecv",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+    .name = "packetRecv",
+    .stack_size = 128 * 4,
+    .priority = (osPriority_t)osPriorityNormal,
 };
 
 struct sockaddr_in addr_t = {0};
-int32_t sock;
+
+int32_t telemetrySock;
+int32_t commandSock;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 /**
-  * @brief  Wi-Fi event callback
-  * @param  event_id: Event ID
-  * @param  event_args: Event arguments
-  */
+ * @brief  Wi-Fi event callback
+ * @param  event_id: Event ID
+ * @param  event_args: Event arguments
+ */
 static void APP_wifi_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
-  * @brief  Network event callback
-  * @param  event_id: Event ID
-  * @param  event_args: Event arguments
-  */
+ * @brief  Network event callback
+ * @param  event_id: Event ID
+ * @param  event_args: Event arguments
+ */
 static void APP_net_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
-  * @brief  MQTT event callback
-  * @param  event_id: Event ID
-  * @param  event_args: Event arguments
-  */
+ * @brief  MQTT event callback
+ * @param  event_id: Event ID
+ * @param  event_args: Event arguments
+ */
 static void APP_mqtt_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
-  * @brief  BLE event callback
-  * @param  event_id: Event ID
-  * @param  event_args: Event arguments
-  */
+ * @brief  BLE event callback
+ * @param  event_id: Event ID
+ * @param  event_args: Event arguments
+ */
 static void APP_ble_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
-  * @brief  W6X error callback
-  * @param  ret_w6x: W6X status
-  * @param  func_name: function name
-  */
+ * @brief  W6X error callback
+ * @param  ret_w6x: W6X status
+ * @param  func_name: function name
+ */
 static void APP_error_cb(W6X_Status_t ret_w6x, char const *func_name);
 
 /* USER CODE BEGIN PFP */
 
-void APP_init_socket();
+void APP_init_socket(int32_t*, int);
 
 void UDP_packet_handler(void *args);
 
@@ -138,7 +144,6 @@ void main_app(void)
   W6X_Status_t ret;
 
   /* USER CODE BEGIN main_app_1 */
-
   static IMUContext_t imuContext;
 
   imuContext.data_in = &data_in;
@@ -153,7 +158,6 @@ void main_app(void)
       &imuTaskHandle);
 
   // create udp packet recv thread
-  
   packetRecvTask = osThreadNew(UDP_packet_handler, NULL, &packetRecvTask_attributes);
 
   /* USER CODE END main_app_1 */
@@ -183,7 +187,13 @@ void main_app(void)
   }
 
   /* USER CODE BEGIN main_app_3 */
-  APP_init_socket(); // connec
+  
+  // Create two instances of sockets, one for command & another for telemetry 
+  APP_init_socket(&telemetrySock, REMOTE_TELE_PORT); 
+  APP_init_socket(&commandSock, REMOTE_COMMAND_PORT); 
+    
+  HAL_UART_Receive_IT(&huart1, &rx_byte, 1);
+
   /* USER CODE END main_app_3 */
 
   LogInfo("##### Quitting the application\n");
@@ -239,7 +249,19 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 /* USER CODE BEGIN FD */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
 
+  if (huart->Instance == USART1)
+  {
+
+    // Send notification to handle the packet or a task that keeps handling
+
+
+    HAL_UART_Receive_IT(&huart1, &rx_byte, 1);
+  }
+
+}
 /* USER CODE END FD */
 
 /* Private Functions Definition ----------------------------------------------*/
@@ -292,22 +314,20 @@ static void APP_error_cb(W6X_Status_t ret_w6x, char const *func_name)
 }
 
 /* USER CODE BEGIN PFD */
-// TODO: Create another socket and separate telemetry & command sockets
-void APP_init_socket()
+void APP_init_socket(int32_t *sock, int port)
 {
 
   uint8_t remote_app_server_addr[4] = {192, 168, 0, 1};
 
-  uint16_t remote_app_port = REMTOE_APP_PORT;
+  uint16_t remote_app_port = port;
 
   int32_t net_ret = 0;
   int32_t ret_code = -1;
-  int32_t sock = -1;
 
   // Create a UDP socket
   LogInfo("\nCreate a new socket\n");
-  sock = W6X_Net_Socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-  if (sock < 0)
+  *sock = W6X_Net_Socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+  if (*sock < 0)
   {
     LogInfo("Socket creation failed\n");
     goto end;
@@ -319,9 +339,9 @@ void APP_init_socket()
   addr_t.sin_addr.s_addr = ATON(remote_app_server_addr);
 
 end:
-  if (sock >= 0)
+  if (*sock >= 0)
   {
-    net_ret = W6X_Net_Close(sock); /* Close the TCP socket */
+    net_ret = W6X_Net_Close(*sock); /* Close the TCP socket */
     if (net_ret != 0)
     {
       LogError("Socket close failed\n");
@@ -333,6 +353,7 @@ end:
   }
 }
 
+// Handles received udp packets
 void UDP_packet_handler(void *args)
 {
 
@@ -344,7 +365,7 @@ void UDP_packet_handler(void *args)
     char data[5] = "hallo";
 
     W6X_Net_Sendto(
-        sock,
+        telemetrySock,
         data,
         sizeof(data),
         0,
@@ -352,13 +373,12 @@ void UDP_packet_handler(void *args)
         sizeof(addr_t));
 
     uint8_t bufferp[512];
-    int32_t len = W6X_Net_Recv(sock, &bufferp, sizeof(bufferp), 0);
+    int32_t len = W6X_Net_Recv(commandSock, &bufferp, sizeof(bufferp), 0);
 
     if (len > 0) // there's data
     {
       /* code */
     }
-
   }
 }
 /* USER CODE END PFD */

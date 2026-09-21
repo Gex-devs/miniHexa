@@ -64,7 +64,8 @@ extern "C" {
 /* Exported macros -----------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 
-#define REMTOE_APP_PORT  4040
+#define REMOTE_TELE_PORT  4040
+#define REMOTE_COMMAND_PORT  4041
 /* USER CODE END EM */
 
 /* Exported functions --------------------------------------------------------*/
