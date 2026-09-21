@@ -67,23 +67,16 @@ typedef enum
 /** Select output log mode [0: printf / 1: UART / 2: ITM] */
 #define LOG_OUTPUT_MODE             LOG_OUTPUT_UART
 
-/** SSID of the local Access Point */
-#define WIFI_SSID                   "Ged-IOT"
-
-/** Password of the local Access Point */
-#define WIFI_PASSWORD               "IOT@here22"
-
-/** Define the default factor to apply to AP DTIM interval when connected and power save mode is enabled */
-#define WIFI_DTIM                   1
-
 /** Low power configuration [0: disable / 1: sleep / 2: stop / 3: standby] */
 #define LOW_POWER_MODE              LOW_POWER_DISABLE
 
-/* Automation usage */
-/** Enable/Disable the test automation */
-#define TEST_AUTOMATION_ENABLE      0
-
 /* USER CODE BEGIN EC */
+
+// WIfi SSD
+#define WIFI_SSD   "Ged IOT"
+
+// WIfi password
+#define WIFI_PASSWORD  "IOT@Pass22"
 
 /* USER CODE END EC */
 
