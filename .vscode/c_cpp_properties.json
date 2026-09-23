@@ -17,8 +17,13 @@
                 "${workspaceFolder}/Middlewares/ST/ST67W6X_Network_Driver/Driver/W61_at",
                 "${workspaceFolder}/Middlewares/ST/ST67W6X_Network_Driver/Driver/W61_bus",
                 "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
+                "${workspaceFolder}/XUBEEMS1/Target",
                 "${workspaceFolder}/Drivers/BSP/Components/lsm6dsl",
-                "${workspaceFolder}/Middlewares/ST/STM32_MotionDI_Library/Inc"
+                "${workspaceFolder}/Middlewares/ST/STM32_MotionDI_Library/Inc",
+                "${workspaceFolder}/ST67W6X/App",
+                "${workspaceFolder}/Appli/App",
+                "${workspaceFolder}/Appli/Target",
+                "${workspaceFolder}/lib/STM32luePillCServoibrary/SCSLib"
             ],
             "defines": [
                 "ST67_ARCH",

@@ -45,7 +45,8 @@
 
 /* USER CODE BEGIN Includes */
 #include <imu.h>
-
+#include <uart_hd.h>
+#include <SMS_STS.h>
 /* USER CODE END Includes */
 
 /* Global variables ----------------------------------------------------------*/
@@ -73,7 +74,8 @@
 /* USER CODE BEGIN PV */
 extern UART_HandleTypeDef huart1;
 
-uint8_t rx_byte;
+#define RX_BUF_LEN 128
+uint8_t rx_byte[RX_BUF_LEN];
 
 TaskHandle_t imuTaskHandle;
 
@@ -96,43 +98,43 @@ int32_t commandSock;
 
 /* Private function prototypes -----------------------------------------------*/
 /**
- * @brief  Wi-Fi event callback
- * @param  event_id: Event ID
- * @param  event_args: Event arguments
- */
+  * @brief  Wi-Fi event callback
+  * @param  event_id: Event ID
+  * @param  event_args: Event arguments
+  */
 static void APP_wifi_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
- * @brief  Network event callback
- * @param  event_id: Event ID
- * @param  event_args: Event arguments
- */
+  * @brief  Network event callback
+  * @param  event_id: Event ID
+  * @param  event_args: Event arguments
+  */
 static void APP_net_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
- * @brief  MQTT event callback
- * @param  event_id: Event ID
- * @param  event_args: Event arguments
- */
+  * @brief  MQTT event callback
+  * @param  event_id: Event ID
+  * @param  event_args: Event arguments
+  */
 static void APP_mqtt_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
- * @brief  BLE event callback
- * @param  event_id: Event ID
- * @param  event_args: Event arguments
- */
+  * @brief  BLE event callback
+  * @param  event_id: Event ID
+  * @param  event_args: Event arguments
+  */
 static void APP_ble_cb(W6X_event_id_t event_id, void *event_args);
 
 /**
- * @brief  W6X error callback
- * @param  ret_w6x: W6X status
- * @param  func_name: function name
- */
+  * @brief  W6X error callback
+  * @param  ret_w6x: W6X status
+  * @param  func_name: function name
+  */
 static void APP_error_cb(W6X_Status_t ret_w6x, char const *func_name);
 
 /* USER CODE BEGIN PFP */
 
-void APP_init_socket(int32_t*, int);
+void APP_init_socket(int32_t *, int);
 
 void UDP_packet_handler(void *args);
 
@@ -187,12 +189,14 @@ void main_app(void)
   }
 
   /* USER CODE BEGIN main_app_3 */
-  
-  // Create two instances of sockets, one for command & another for telemetry 
-  APP_init_socket(&telemetrySock, REMOTE_TELE_PORT); 
-  APP_init_socket(&commandSock, REMOTE_COMMAND_PORT); 
-    
-  HAL_UART_Receive_IT(&huart1, &rx_byte, 1);
+
+  // Create two instances of sockets, one for command & another for telemetry
+  APP_init_socket(&telemetrySock, REMOTE_TELE_PORT);
+  APP_init_socket(&commandSock, REMOTE_COMMAND_PORT);
+
+  USART_HD_Init(&huart1, rx_byte);
+
+  HAL_UART_Receive_IT(&huart1, rx_byte, 1);
 
   /* USER CODE END main_app_3 */
 
@@ -254,13 +258,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
   if (huart->Instance == USART1)
   {
-
     // Send notification to handle the packet or a task that keeps handling
-
-
-    HAL_UART_Receive_IT(&huart1, &rx_byte, 1);
+    HAL_UART_Receive_IT(&huart1, rx_byte, 1);
+    USART_HD_IRQHandler();
   }
-
 }
 /* USER CODE END FD */
 
@@ -322,7 +323,6 @@ void APP_init_socket(int32_t *sock, int port)
   uint16_t remote_app_port = port;
 
   int32_t net_ret = 0;
-  int32_t ret_code = -1;
 
   // Create a UDP socket
   LogInfo("\nCreate a new socket\n");
@@ -377,6 +377,7 @@ void UDP_packet_handler(void *args)
 
     if (len > 0) // there's data
     {
+      WritePosEx(1, 4095, 2250, 50); // For testing purposes
       /* code */
     }
   }
