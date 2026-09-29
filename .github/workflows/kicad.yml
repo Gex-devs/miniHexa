@@ -34,14 +34,16 @@ jobs:
         run: sudo chmod +x $EXPORT_SCH_BASH
       - name: runExport
         run: $EXPORT_SCH_BASH
+      - name: setInteractiveBomDisplay
+        run: export INTERACTIVE_HTML_BOM_NO_DISPLAY=1
       - name: genBom
         run: generate_interactive_bom $PROJECT_NAME.kicad_pcb --no-browser True --dest-dir ./ --name-format index --include-tracks True
-      # - name: "Commit and Push"
-      #   run: |
-      #     git config user.name "${{github.actor}}"
-      #     git config user.email "${{github.actor}}@users.noreply.github.com"
-      #     git add $PREVIEW_DIR 
-      #     git diff --cached --quiet || git commit -m "Update schematic preview [skip ci]"
-      #     git push
+      - name: "Commit and Push"
+        run: |
+          git config user.name "${{github.actor}}"
+          git config user.email "${{github.actor}}@users.noreply.github.com"
+          git add $PREVIEW_DIR 
+          git diff --cached --quiet || git commit -m "Update schematic preview [skip ci]"
+          git push
       - name: debug
         run: ls -l ./audioVisualizer_PCB/Preview
