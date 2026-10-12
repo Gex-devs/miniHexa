@@ -60,7 +60,7 @@
           "hatch_smoothing_level": 0,
           "hatch_smoothing_value": 0.1,
           "hatch_thickness": 1.0,
-          "min_clearance": 0.5,
+          "min_clearance": 0.0,
           "min_island_area": 10.0,
           "min_thickness": 0.25,
           "pad_connection": 1,
@@ -76,32 +76,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        [
-          "clearance|166075000|84937500|7e925638-3656-47ed-8b6d-849784f24c44|ee10143a-96ba-439e-aec2-893df3b372f1",
-          ""
-        ],
-        [
-          "clearance|166575000|85387500|f691934b-e4e2-43b8-9b6a-f7703834bfb1|7e925638-3656-47ed-8b6d-849784f24c44",
-          ""
-        ],
-        [
-          "clearance|167250000|83062500|678aca3c-990c-4d13-be0d-36fcb3c09720|b5f13740-22d4-4a10-8a7d-7670cbed4ab8",
-          ""
-        ],
-        [
-          "clearance|167600000|83062500|b5f13740-22d4-4a10-8a7d-7670cbed4ab8|f9f3acab-7f47-444e-8c29-e76e8f6dca69",
-          ""
-        ],
-        [
-          "clearance|167600000|84587500|afa4ce24-2707-4e63-9402-48f272edf247|3a8eebd9-0ca6-4848-86db-be3c65c4c719",
-          ""
-        ],
-        [
-          "invalid_outline|116750000|75787456|16d16864-efe3-48a2-937d-0234b66f96b9|ad9fb64b-8993-417c-b854-4260380756a9",
-          ""
-        ]
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -711,7 +686,7 @@
         "uuid": "3449ee66-2977-4802-a474-0821cdf4e79b"
       }
     ],
-    "used_designators": "SW1,R1,C13,#PWR12,#PWR22,#PWR57",
+    "used_designators": "#PWR16,#PWR22",
     "variants": []
   },
   "sheets": [
