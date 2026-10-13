@@ -6388,7 +6388,7 @@
 		(dnp no)
 		(uuid "62d0cdf0-8ef4-4a0e-bbaf-e151206b852a")
 		(property "Reference" "C22"
-			(at 232.41 53.34 0)
+			(at 234.188 66.04 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6399,7 +6399,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 233.426 55.372 0)
+			(at 235.204 68.072 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
