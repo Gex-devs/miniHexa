@@ -686,7 +686,7 @@
         "uuid": "3449ee66-2977-4802-a474-0821cdf4e79b"
       }
     ],
-    "used_designators": "C36,JP1-2,#PWR16,#PWR22,#PWR73,#PWR76",
+    "used_designators": "",
     "variants": []
   },
   "sheets": [
@@ -700,7 +700,7 @@
     ],
     [
       "33698118-31e2-44d0-a5be-b46ca646d44a",
-      "POWER HANDLER"
+      "Power_handler"
     ]
   ],
   "text_variables": {},
